@@ -1,0 +1,15 @@
+/* Bento box styling & stats visualizations */
+.bento-card {
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bento-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-primary-container, #2563eb);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+/* Revenue Chart Animations */
+.chart-bar {
+    transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+}

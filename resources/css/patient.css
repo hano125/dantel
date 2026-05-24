@@ -1,0 +1,35 @@
+/* Medical Timeline & Dental Chart Styles */
+.tooth-grid {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    gap: 6px;
+}
+
+@media (max-width: 768px) {
+    .tooth-grid {
+        grid-template-columns: repeat(8, 1fr);
+    }
+}
+
+.tooth-item {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.tooth-item:hover {
+    transform: scale(1.1);
+}
+
+/* Timeline bullet points design */
+.timeline-bullet::before {
+    content: '';
+    position: absolute;
+    right: -25px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--color-primary, #004ac6);
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 2px var(--color-outline-variant, #c3c6d7);
+    z-index: 10;
+}

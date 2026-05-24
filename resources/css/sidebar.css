@@ -1,0 +1,36 @@
+/* Sidebar Transitions & Collapsed State Styles */
+#app-sidebar {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: var(--spacing-sidebar-width, 260px);
+}
+
+/* Collapsed class applied via JS */
+#app-sidebar.sidebar-collapsed {
+    width: 70px !important;
+}
+
+#app-sidebar.sidebar-collapsed .sidebar-text {
+    display: none !important;
+}
+
+#app-sidebar.sidebar-collapsed .group-collapsed-hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+#app-sidebar.sidebar-collapsed .sidebar-item {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+/* Sidebar Active Item Highlight */
+.sidebar-item-active {
+    border-right: 4px solid var(--color-primary, #004ac6);
+    background-color: rgba(0, 74, 198, 0.05);
+}
+
+/* Submenu layout transitions */
+#sidebar-treatment-submenu {
+    transition: max-height 0.2s ease-out;
+}

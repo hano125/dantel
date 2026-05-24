@@ -1,0 +1,34 @@
+/* Invoice Drawer Slide In - Left-anchored in RTL */
+#invoicePreview {
+    position: fixed;
+    left: 0;
+    top: 64px;
+    bottom: 0;
+    width: 420px;
+    max-width: 90vw;
+    z-index: 45;
+    background: #ffffff;
+    box-shadow: 10px 0 30px -5px rgba(0, 0, 0, 0.08);
+    transform: translateX(-105%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#invoicePreview.drawer-open {
+    transform: translateX(0) !important;
+}
+
+#invoice-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 44;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#invoice-overlay.overlay-open {
+    opacity: 1;
+    pointer-events: auto;
+}

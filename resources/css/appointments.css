@@ -1,0 +1,37 @@
+/* Kanban Board & Schedule Styles */
+#kanbanBoard {
+    transition: opacity 0.3s ease;
+}
+
+#calendarView {
+    transition: opacity 0.3s ease;
+}
+
+/* Grab cursors for Drag and Drop simulation */
+.kanban-card {
+    cursor: grab;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kanban-card:active {
+    cursor: grabbing;
+    transform: scale(0.98);
+}
+
+/* Custom Scrollbar for Medical Theme */
+.custom-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: #f8fafc;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
