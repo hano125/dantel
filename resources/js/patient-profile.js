@@ -1,51 +1,51 @@
 /* Interactive Patient Profile & Tooth Map */
 document.addEventListener('DOMContentLoaded', () => {
-    // Tooth selection micro-interactions
+    // ─────────────────────────────────────────────────
+    // Tooth Map — click to inspect
+    // ─────────────────────────────────────────────────
     const teeth = document.querySelectorAll('.tooth-item');
-    const selectedToothDetails = document.getElementById('selected-tooth-details');
-    const selectedToothNum = document.getElementById('selected-tooth-number');
+    const toothDetails = document.getElementById('selected-tooth-details');
+    const toothNum     = document.getElementById('selected-tooth-number');
+
+    const stateMap = {
+        'healthy':           'سليم ✓',
+        'needs-treatment':   'يحتاج علاج — تسوس عميق ⚠️',
+        'in-progress':       'قيد العلاج — حشوة عصب 🔵',
+    };
 
     teeth.forEach(tooth => {
-        tooth.addEventListener('click', function() {
-            // Toggle highlight ring
-            teeth.forEach(t => t.classList.remove('ring-2', 'ring-primary', 'scale-105'));
-            this.classList.add('ring-2', 'ring-primary', 'scale-105');
-            
-            const toothId = this.getAttribute('data-tooth-id');
-            const state = this.getAttribute('data-state');
-            let stateText = 'سليم';
-            if (state === 'needs-treatment') {
-                stateText = 'يحتاج علاج (تسوس عميق)';
-            } else if (state === 'in-progress') {
-                stateText = 'قيد العلاج (حشوة عصب)';
-            }
-            
-            if (selectedToothNum && selectedToothDetails) {
-                selectedToothNum.innerText = `السن رقم ${toothId}`;
-                selectedToothDetails.innerText = `حالة السن: ${stateText}. مستحلب من الجلسة السابقة.`;
-            }
+        tooth.addEventListener('click', function () {
+            // Remove selected state from all
+            teeth.forEach(t => t.classList.remove('selected', 'ring-2', 'ring-primary'));
+            this.classList.add('selected');
+
+            const id    = this.dataset.toothId;
+            const state = this.dataset.state;
+
+            if (toothNum)     toothNum.innerText     = `السن رقم ${id}`;
+            if (toothDetails) toothDetails.innerText = `الحالة: ${stateMap[state] || 'غير محدد'}`;
         });
     });
 
-    // Patient Profile Tabs Toggling
-    const tabButtons = document.querySelectorAll('.patient-tab-btn');
+    // ─────────────────────────────────────────────────
+    // Tab Navigation — now uses `active` CSS class
+    // ─────────────────────────────────────────────────
+    const tabBtns   = document.querySelectorAll('.patient-tab-btn');
     const tabPanels = document.querySelectorAll('.patient-tab-panel');
 
-    tabButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const targetTab = this.getAttribute('data-tab');
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const target = this.dataset.tab;
 
-            tabButtons.forEach(b => {
-                b.classList.remove('border-primary', 'text-primary', 'border-b-2');
-                b.classList.add('text-on-surface-variant', 'hover:text-on-surface');
-            });
+            // Update button states
+            tabBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
 
-            this.classList.add('border-primary', 'text-primary', 'border-b-2');
-            this.classList.remove('text-on-surface-variant', 'hover:text-on-surface');
-
+            // Show / hide panels with a small fade
             tabPanels.forEach(panel => {
-                if (panel.id === `${targetTab}-panel`) {
+                if (panel.id === `${target}-panel`) {
                     panel.classList.remove('hidden');
+                    panel.style.animation = 'fadeInUp 0.3s ease both';
                 } else {
                     panel.classList.add('hidden');
                 }

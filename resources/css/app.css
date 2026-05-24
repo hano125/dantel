@@ -16,38 +16,324 @@
 @import "./billing.css";
 
 @theme {
-    /* Custom Brand Colors for Dentera Medical ERP */
-    --color-primary: #004ac6;
-    --color-primary-container: #2563eb;
-    --color-secondary: #006b5f;
-    --color-secondary-container: #6df5e1;
-    --color-background: #f7f9fb;
-    --color-surface: #f7f9fb;
-    --color-surface-container: #eceef0;
-    --color-surface-container-low: #f2f4f6;
+    /* ── Brand Color Palette ── */
+    --color-primary:                  #1a56db;
+    --color-primary-light:            #3b82f6;
+    --color-primary-container:        #1e40af;
+    --color-primary-fixed:            #dbeafe;
+    --color-primary-fixed-dim:        #93c5fd;
+    --color-on-primary:               #ffffff;
+    --color-on-primary-container:     #ffffff;
+
+    --color-secondary:                #059669;
+    --color-secondary-container:      #d1fae5;
+    --color-secondary-fixed:          #a7f3d0;
+    --color-on-secondary:             #ffffff;
+    --color-on-secondary-container:   #064e3b;
+
+    --color-tertiary:                 #7c3aed;
+    --color-tertiary-fixed:           #ede9fe;
+    --color-on-tertiary:              #ffffff;
+    --color-on-tertiary-container:    #4c1d95;
+
+    /* ── Neutral Surface System ── */
+    --color-background:               #f0f4f9;
+    --color-surface:                  #f8fafd;
+    --color-surface-bright:           #ffffff;
+    --color-surface-container:        #eaeff6;
+    --color-surface-container-low:    #f0f4f9;
     --color-surface-container-lowest: #ffffff;
-    --color-on-surface: #191c1e;
-    --color-on-surface-variant: #434655;
-    --color-outline: #737686;
-    --color-outline-variant: #c3c6d7;
-    --color-error: #ba1a1a;
-    --color-error-container: #ffdad6;
-    --color-on-error: #ffffff;
-    --color-on-error-container: #93000a;
-    
-    /* Layout & Spacing Scales */
-    --spacing-sidebar-width: 260px;
-    --spacing-gutter: 24px;
-    --spacing-stack-lg: 24px;
-    --spacing-stack-md: 12px;
-    --spacing-stack-sm: 4px;
-    
-    /* Font overrides */
+    --color-surface-container-high:   #dde3ed;
+
+    --color-on-surface:               #0f172a;
+    --color-on-surface-variant:       #475569;
+    --color-outline:                  #94a3b8;
+    --color-outline-variant:          #e2e8f0;
+
+    /* ── Semantic Colors ── */
+    --color-error:                    #dc2626;
+    --color-error-container:          #fee2e2;
+    --color-on-error:                 #ffffff;
+    --color-on-error-container:       #7f1d1d;
+
+    /* ── Layout ── */
+    --spacing-sidebar-width:          272px;
+    --spacing-gutter:                 28px;
+    --spacing-stack-lg:               24px;
+    --spacing-stack-md:               12px;
+    --spacing-stack-sm:               6px;
+
+    /* ── Typography ── */
     --font-sans: 'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui;
+}
+
+/* ─────────────────────────────────────────────
+   GLOBAL BASE STYLES
+───────────────────────────────────────────── */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'IBM Plex Sans Arabic', 'IBM Plex Sans', sans-serif;
     background-color: var(--color-background);
     color: var(--color-on-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
 }
+
+/* ─────────────────────────────────────────────
+   SCROLLBAR STYLING
+───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-outline-variant); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-outline); }
+
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ─────────────────────────────────────────────
+   GLASS CARD UTILITY
+───────────────────────────────────────────── */
+.glass-card {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+/* ─────────────────────────────────────────────
+   PREMIUM CARD BASE
+───────────────────────────────────────────── */
+.premium-card {
+    background: #ffffff;
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+    transition: box-shadow 0.25s ease, transform 0.2s ease;
+}
+.premium-card:hover {
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1), 0 1px 4px rgba(15, 23, 42, 0.06);
+    transform: translateY(-1px);
+}
+
+/* ─────────────────────────────────────────────
+   BENTO CARD UPGRADES
+───────────────────────────────────────────── */
+.bento-card {
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05), 0 4px 12px rgba(15, 23, 42, 0.03);
+    transition: box-shadow 0.3s ease, transform 0.2s ease, border-color 0.25s ease;
+}
+.bento-card:hover {
+    box-shadow: 0 6px 24px rgba(26, 86, 219, 0.12), 0 2px 8px rgba(15, 23, 42, 0.06);
+    transform: translateY(-2px);
+    border-color: rgba(26, 86, 219, 0.3);
+}
+
+/* ─────────────────────────────────────────────
+   GRADIENT ICON BADGES
+───────────────────────────────────────────── */
+.icon-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    font-size: 22px;
+}
+.icon-badge-primary   { background: linear-gradient(135deg, rgba(26,86,219,0.12), rgba(59,130,246,0.08)); color: var(--color-primary); }
+.icon-badge-secondary { background: linear-gradient(135deg, rgba(5,150,105,0.12), rgba(16,185,129,0.08)); color: var(--color-secondary); }
+.icon-badge-error     { background: linear-gradient(135deg, rgba(220,38,38,0.12), rgba(248,113,113,0.08)); color: var(--color-error); }
+.icon-badge-tertiary  { background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(167,139,250,0.08)); color: var(--color-tertiary); }
+
+/* ─────────────────────────────────────────────
+   STATUS BADGES
+───────────────────────────────────────────── */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+.badge-success { background: rgba(5, 150, 105, 0.1); color: var(--color-secondary); border: 1px solid rgba(5,150,105,0.2); }
+.badge-pending { background: rgba(26, 86, 219, 0.08); color: var(--color-primary); border: 1px solid rgba(26,86,219,0.15); }
+.badge-error   { background: var(--color-error-container); color: var(--color-error); border: 1px solid rgba(220,38,38,0.2); }
+.badge-warning { background: rgba(245, 158, 11, 0.1); color: #b45309; border: 1px solid rgba(245,158,11,0.25); }
+.badge-neutral { background: var(--color-surface-container); color: var(--color-on-surface-variant); border: 1px solid var(--color-outline-variant); }
+
+/* ─────────────────────────────────────────────
+   BUTTON VARIANTS
+───────────────────────────────────────────── */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    color: var(--color-on-primary);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(26, 86, 219, 0.35);
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    box-shadow: 0 4px 16px rgba(26, 86, 219, 0.45);
+    transform: translateY(-1px);
+}
+.btn-primary:active { transform: scale(0.97); }
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    background: var(--color-surface-container-lowest);
+    color: var(--color-on-surface);
+    border: 1.5px solid var(--color-outline-variant);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+.btn-secondary:hover { background: var(--color-surface-container); border-color: var(--color-primary); color: var(--color-primary); }
+
+/* ─────────────────────────────────────────────
+   TABLE STYLES
+───────────────────────────────────────────── */
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    text-align: right;
+}
+.data-table thead tr {
+    background: var(--color-surface-container-low);
+}
+.data-table thead th {
+    padding: 14px 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-on-surface-variant);
+}
+.data-table tbody tr {
+    transition: background-color 0.15s ease;
+    border-bottom: 1px solid var(--color-outline-variant);
+}
+.data-table tbody tr:hover { background-color: rgba(26, 86, 219, 0.025); }
+.data-table td { padding: 14px 16px; font-size: 14px; vertical-align: middle; }
+
+/* ─────────────────────────────────────────────
+   FORM ELEMENTS
+───────────────────────────────────────────── */
+.form-input {
+    width: 100%;
+    background: var(--color-surface-container-lowest);
+    border: 1.5px solid var(--color-outline-variant);
+    border-radius: 10px;
+    padding: 11px 14px;
+    font-size: 14px;
+    color: var(--color-on-surface);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(26, 86, 219, 0.12);
+}
+
+/* ─────────────────────────────────────────────
+   MICRO ANIMATIONS
+───────────────────────────────────────────── */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+@keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(26,86,219,0.4); }
+    70%  { box-shadow: 0 0 0 8px rgba(26,86,219,0); }
+    100% { box-shadow: 0 0 0 0 rgba(26,86,219,0); }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-6px); }
+}
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+@keyframes bar-grow {
+    from { height: 0 !important; opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.animate-fade-in-up   { animation: fadeInUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-slide-in-r   { animation: slideInRight 0.35s ease both; }
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-spin-slow    { animation: spin-slow 12s linear infinite; }
+.animate-pulse-ring   { animation: pulse-ring 2s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite; }
+.animate-bar-grow     { animation: bar-grow 0.8s ease both; }
+
+/* Staggered children */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ─────────────────────────────────────────────
+   FOCUS RING
+───────────────────────────────────────────── */
+:focus-visible {
+    outline: 2.5px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+button:focus:not(:focus-visible), a:focus:not(:focus-visible) { outline: none; }
+
+/* ─────────────────────────────────────────────
+   DARK MODE BASE (System preference)
+───────────────────────────────────────────── */
+.dark body,
+body.dark-mode {
+    --color-background:               #0c1222;
+    --color-surface:                  #111827;
+    --color-surface-bright:           #1a2235;
+    --color-surface-container:        #1e293b;
+    --color-surface-container-low:    #172033;
+    --color-surface-container-lowest: #1a2235;
+    --color-surface-container-high:   #263248;
+    --color-on-surface:               #e2e8f0;
+    --color-on-surface-variant:       #94a3b8;
+    --color-outline:                  #475569;
+    --color-outline-variant:          #1e293b;
+    background-color: #0c1222;
+    color: #e2e8f0;
+}
+
+body.dark-mode .premium-card,
+body.dark-mode .bento-card { background: var(--color-surface-container-lowest); border-color: var(--color-outline-variant); }
+body.dark-mode .glass-card  { background: rgba(26,34,51,0.8); border-color: rgba(255,255,255,0.08); }

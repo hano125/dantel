@@ -7,284 +7,283 @@
 @endpush
 
 @section('content')
-<!-- Header greeting & action button -->
-<div class="flex justify-between items-end mb-8 select-none">
+
+{{-- ─── Page Header ─── --}}
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 select-none">
     <div class="text-right">
-        <h2 class="font-headline-lg text-headline-lg text-on-surface">مرحباً دكتور أحمد</h2>
-        <p class="text-body-lg text-on-surface-variant">نظرة عامة على أداء العيادة اليوم، {{ date('d F Y') }}</p>
+        <h1 class="text-2xl font-bold text-on-surface tracking-tight">مرحباً، د. أحمد 👋</h1>
+        <p class="text-sm text-on-surface-variant mt-1">نظرة شاملة على أداء العيادة — {{ date('d F Y') }}</p>
     </div>
-    <a href="{{ route('appointments') }}" class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-title-md flex items-center gap-2 hover:bg-primary-container transition-all shadow-md active:scale-95">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+    <a href="{{ route('appointments') }}"
+       class="btn-primary shrink-0">
+        <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">add_circle</span>
         <span>موعد جديد</span>
     </a>
 </div>
 
-<!-- Stats widgets grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-stack-lg mb-8 select-none">
-    <!-- Total Patients -->
-    <div class="bento-card bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col gap-2 shadow-sm">
-        <div class="flex justify-between items-start">
-            <span class="text-label-md text-on-surface-variant">إجمالي المرضى</span>
-            <span class="material-symbols-outlined text-primary bg-primary/5 p-2 rounded-lg">group</span>
+{{-- ─── KPI Cards ─── --}}
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mb-8 stagger-children">
+
+    {{-- Total Patients --}}
+    <div class="kpi-card bento-card p-5 col-span-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="icon-badge icon-badge-primary material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">group</span>
+            <span class="badge badge-success text-[10px]">
+                <span class="material-symbols-outlined text-[12px]">trending_up</span>+12%
+            </span>
         </div>
-        <p class="font-headline-md text-headline-md font-bold">1,284</p>
-        <p class="text-label-md text-secondary flex items-center gap-1">
-            <span class="material-symbols-outlined text-[16px]">trending_up</span>
-            <span>+12% الشهر الماضي</span>
-        </p>
+        <p class="text-[13px] text-on-surface-variant font-medium mb-1">إجمالي المرضى</p>
+        <p class="text-2xl font-bold text-on-surface tracking-tight">1,284</p>
+        <p class="text-[11px] text-on-surface-variant mt-1.5">مقارنة بالشهر الماضي</p>
     </div>
 
-    <!-- Today's Appointments -->
-    <div class="bento-card bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col gap-2 shadow-sm">
-        <div class="flex justify-between items-start">
-            <span class="text-label-md text-on-surface-variant">مواعيد اليوم</span>
-            <span class="material-symbols-outlined text-primary bg-primary/5 p-2 rounded-lg">event_available</span>
+    {{-- Today's Appointments --}}
+    <div class="kpi-card bento-card p-5 col-span-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="icon-badge icon-badge-primary material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">event_available</span>
+            <span class="text-[11px] font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">اليوم</span>
         </div>
-        <p class="font-headline-md text-headline-md font-bold">24</p>
-        <p class="text-label-md text-on-surface-variant">8 مكتملة، 16 قادمة</p>
+        <p class="text-[13px] text-on-surface-variant font-medium mb-1">مواعيد اليوم</p>
+        <p class="text-2xl font-bold text-on-surface tracking-tight">24</p>
+        <div class="flex gap-2 mt-1.5">
+            <span class="text-[10px] font-bold text-secondary bg-secondary/8 px-1.5 py-0.5 rounded">✓ 8 مكتملة</span>
+            <span class="text-[10px] font-bold text-primary bg-primary/8 px-1.5 py-0.5 rounded">◷ 16 قادمة</span>
+        </div>
     </div>
 
-    <!-- Revenue -->
-    <div class="bento-card bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col gap-2 shadow-sm">
-        <div class="flex justify-between items-start">
-            <span class="text-label-md text-on-surface-variant">الإيرادات</span>
-            <span class="material-symbols-outlined text-secondary bg-secondary/5 p-2 rounded-lg">payments</span>
+    {{-- Revenue --}}
+    <div class="kpi-card bento-card p-5 col-span-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="icon-badge icon-badge-secondary material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">payments</span>
+            <span class="badge badge-success text-[10px]">
+                <span class="material-symbols-outlined text-[12px]">arrow_upward</span>+8%
+            </span>
         </div>
-        <p class="font-headline-md text-headline-md font-bold">14.2k</p>
-        <p class="text-label-md text-secondary flex items-center gap-0.5">
-            <span class="material-symbols-outlined text-[16px]">arrow_upward</span>
-            <span>SAR هذا الأسبوع</span>
-        </p>
+        <p class="text-[13px] text-on-surface-variant font-medium mb-1">إيرادات الأسبوع</p>
+        <p class="text-2xl font-bold text-on-surface tracking-tight">14.2k</p>
+        <p class="text-[11px] text-on-surface-variant mt-1.5">ريال سعودي</p>
     </div>
 
-    <!-- Pending Payments -->
-    <div class="bento-card bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col gap-2 shadow-sm">
-        <div class="flex justify-between items-start">
-            <span class="text-label-md text-on-surface-variant">مدفوعات معلقة</span>
-            <span class="material-symbols-outlined text-error bg-error/5 p-2 rounded-lg">error</span>
+    {{-- Pending Payments --}}
+    <div class="kpi-card bento-card p-5 col-span-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="icon-badge icon-badge-error material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
+            <span class="badge badge-error text-[10px]">5 فواتير</span>
         </div>
-        <p class="font-headline-md text-headline-md font-bold">3.8k</p>
-        <p class="text-label-md text-on-surface-variant">5 فواتير غير مدفوعة</p>
+        <p class="text-[13px] text-on-surface-variant font-medium mb-1">مدفوعات معلقة</p>
+        <p class="text-2xl font-bold text-on-surface tracking-tight">3.8k</p>
+        <p class="text-[11px] text-on-surface-variant mt-1.5">يجب المتابعة</p>
     </div>
 
-    <!-- Active Treatments -->
-    <div class="bento-card bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col gap-2 shadow-sm">
-        <div class="flex justify-between items-start">
-            <span class="text-label-md text-on-surface-variant">علاجات نشطة</span>
-            <span class="material-symbols-outlined text-primary bg-primary/5 p-2 rounded-lg">dentistry</span>
+    {{-- Active Treatments --}}
+    <div class="kpi-card bento-card p-5 col-span-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="icon-badge icon-badge-primary material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">dentistry</span>
         </div>
-        <p class="font-headline-md text-headline-md font-bold">45</p>
-        <p class="text-label-md text-on-surface-variant">تقويم وجراحة</p>
+        <p class="text-[13px] text-on-surface-variant font-medium mb-1">علاجات نشطة</p>
+        <p class="text-2xl font-bold text-on-surface tracking-tight">45</p>
+        <p class="text-[11px] text-on-surface-variant mt-1.5">تقويم وجراحة وجذور</p>
     </div>
 
-    <!-- Doctors Online -->
-    <div class="bento-card bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col gap-2 shadow-sm">
-        <div class="flex justify-between items-start">
-            <span class="text-label-md text-on-surface-variant">أطباء متصلون</span>
-            <span class="material-symbols-outlined text-secondary bg-secondary/5 p-2 rounded-lg">online_prediction</span>
+    {{-- Doctors Online --}}
+    <div class="kpi-card bento-card p-5 col-span-1">
+        <div class="flex justify-between items-start mb-3">
+            <span class="icon-badge icon-badge-secondary material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">online_prediction</span>
+            <span class="badge badge-success text-[10px]">متصل</span>
         </div>
-        <p class="font-headline-md text-headline-md font-bold">6/8</p>
-        <div class="flex -space-x-2 space-x-reverse justify-end">
-            <img class="w-6 h-6 rounded-full border border-surface-container-lowest object-cover" alt="Dr. Ahmed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVk-DarJYIDgMt5--5WMXXXHMfKGSCHaoiynWIb_nvGJAnOMn-5YI9FN3FSbyJrtn38MZ5g_lJA4_GtIXgn_VULMrGK-72ya1iFZwxVawtgZoRe2I6ISK3u1uwUNe1KA8PzNpFsY4ugJYBI_MixgoAHUDEPgc5jEZTfQeRjEXhgxPfbO3siKDQQALPVZvbs1DcjQD3iLepIl4dHS05O-jgalmFQ8nA9Rml3gevFtBuJvToEKV2NVMQdL72m6sd4GzU4EWpkbmQPmQ"/>
-            <div class="w-6 h-6 rounded-full border border-surface-container-lowest bg-primary text-[10px] text-on-primary flex items-center justify-center font-bold">MA</div>
-            <div class="w-6 h-6 rounded-full border border-surface-container-lowest bg-secondary text-[10px] text-on-secondary flex items-center justify-center font-bold">FA</div>
+        <p class="text-[13px] text-on-surface-variant font-medium mb-1">الأطباء المتصلون</p>
+        <p class="text-2xl font-bold text-on-surface tracking-tight">6 <span class="text-base text-on-surface-variant font-medium">/ 8</span></p>
+        <div class="flex -space-x-1.5 space-x-reverse mt-2">
+            <img class="w-6 h-6 rounded-full border-2 border-surface-container-lowest object-cover" alt="Dr" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVk-DarJYIDgMt5--5WMXXXHMfKGSCHaoiynWIb_nvGJAnOMn-5YI9FN3FSbyJrtn38MZ5g_lJA4_GtIXgn_VULMrGK-72ya1iFZwxVawtgZoRe2I6ISK3u1uwUNe1KA8PzNpFsY4ugJYBI_MixgoAHUDEPgc5jEZTfQeRjEXhgxPfbO3siKDQQALPVZvbs1DcjQD3iLepIl4dHS05O-jgalmFQ8nA9Rml3gevFtBuJvToEKV2NVMQdL72m6sd4GzU4EWpkbmQPmQ"/>
+            <div class="w-6 h-6 rounded-full border-2 border-surface-container-lowest bg-primary text-[9px] text-on-primary flex items-center justify-center font-bold">MA</div>
+            <div class="w-6 h-6 rounded-full border-2 border-surface-container-lowest bg-secondary text-[9px] text-on-secondary flex items-center justify-center font-bold">FA</div>
+            <div class="w-6 h-6 rounded-full border-2 border-surface-container-lowest bg-outline-variant text-[9px] text-on-surface-variant flex items-center justify-center font-bold">+3</div>
         </div>
     </div>
 </div>
 
-<!-- Bento grid for charts & lists -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start">
-    <!-- Revenue Graph (8 columns) -->
-    <div class="lg:col-span-8 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm h-[400px] flex flex-col justify-between">
+{{-- ─── Charts + Calendar Row ─── --}}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
+
+    {{-- Revenue Chart (8 cols) --}}
+    <div class="lg:col-span-8 premium-card p-6 flex flex-col" style="min-height:360px;">
         <div class="flex justify-between items-center mb-6 select-none">
-            <h3 class="font-title-lg text-title-lg">رسم بياني للإيرادات (SAR)</h3>
-            <div class="flex gap-2">
-                <button class="graph-toggle px-3 py-1 bg-surface-container text-on-surface-variant rounded text-label-md cursor-pointer hover:bg-outline-variant transition-colors">أسبوع</button>
-                <button class="graph-toggle px-3 py-1 bg-primary text-on-primary rounded text-label-md cursor-pointer transition-colors">شهر</button>
+            <h2 class="text-[15px] font-bold text-on-surface">رسم بياني للإيرادات (SAR)</h2>
+            <div class="graph-toggle-group">
+                <button class="graph-toggle" data-period="week">أسبوع</button>
+                <button class="graph-toggle active" data-period="month">شهر</button>
+                <button class="graph-toggle" data-period="year">سنة</button>
             </div>
         </div>
-        
-        <div class="flex-grow flex items-end gap-3 pb-2 border-b border-outline-variant h-64">
-            <div class="chart-bar flex-grow bg-primary/20 rounded-t-lg transition-all hover:bg-primary/30" data-height="40%" style="height: 40%"></div>
-            <div class="chart-bar flex-grow bg-primary/30 rounded-t-lg transition-all hover:bg-primary/40" data-height="65%" style="height: 65%"></div>
-            <div class="chart-bar flex-grow bg-primary/40 rounded-t-lg transition-all hover:bg-primary/50" data-height="50%" style="height: 50%"></div>
-            <div class="chart-bar flex-grow bg-primary/50 rounded-t-lg transition-all hover:bg-primary/60" data-height="85%" style="height: 85%"></div>
-            <div class="chart-bar flex-grow bg-primary/60 rounded-t-lg transition-all hover:bg-primary/70" data-height="70%" style="height: 70%"></div>
-            <div class="chart-bar flex-grow bg-primary/80 rounded-t-lg transition-all hover:bg-primary/90" data-height="95%" style="height: 95%"></div>
-            <div class="chart-bar flex-grow bg-primary rounded-t-lg transition-all hover:opacity-90" data-height="80%" style="height: 80%"></div>
-        </div>
-        
-        <div class="flex justify-between pt-4 text-label-md text-on-surface-variant select-none">
-            <span>سبتمبر</span>
-            <span>أكتوبر</span>
-            <span>نوفمبر</span>
-            <span>ديسمبر</span>
-            <span>يناير</span>
-            <span>فبراير</span>
-            <span>مارس</span>
+
+        {{-- Y-axis labels + bars --}}
+        <div class="flex gap-3 flex-1 items-end pb-2 min-h-[220px]">
+            <div class="flex flex-col justify-between h-full text-[10px] text-on-surface-variant text-left pr-2 select-none" style="min-width:38px;">
+                <span>20k</span>
+                <span>15k</span>
+                <span>10k</span>
+                <span>5k</span>
+                <span>0</span>
+            </div>
+            <div class="flex-1 flex items-end gap-2.5 border-b-2 border-outline-variant relative">
+                @php
+                    $months = ['سبتمبر','أكتوبر','نوفمبر','ديسمبر','يناير','فبراير','مارس'];
+                    $values = [40, 65, 50, 85, 70, 95, 80];
+                    $labels = ['8k','13k','10k','17k','14k','19k','16k'];
+                @endphp
+                @foreach($values as $i => $h)
+                <div class="flex-1 flex flex-col items-center gap-1">
+                    <div
+                        class="chart-bar w-full rounded-t-lg cursor-pointer group"
+                        data-height="{{ $h }}%"
+                        data-value="{{ $labels[$i] }}"
+                        style="height: {{ $h }}%; background: linear-gradient(180deg, rgba(26,86,219,{{ 0.4 + $h/200 }}) 0%, rgba(26,86,219,{{ 0.2 + $h/300 }}) 100%);"
+                    ></div>
+                    <span class="text-[10px] text-on-surface-variant select-none whitespace-nowrap">{{ $months[$i] }}</span>
+                </div>
+                @endforeach
+            </div>
         </div>
     </div>
 
-    <!-- Appointment Calendar Overview (4 columns) -->
-    <div class="lg:col-span-4 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col gap-4">
-        <div class="flex justify-between items-center mb-2 select-none">
-            <h3 class="font-title-lg text-title-lg">تقويم المواعيد اليومية</h3>
-            <a href="{{ route('appointments') }}" class="text-primary text-body-md hover:underline font-bold">عرض الكل</a>
+    {{-- Today's Appointments List (4 cols) --}}
+    <div class="lg:col-span-4 premium-card p-6 flex flex-col gap-4">
+        <div class="flex justify-between items-center select-none">
+            <a href="{{ route('appointments') }}" class="text-[13px] text-primary font-bold hover:underline">عرض الكل</a>
+            <h2 class="text-[15px] font-bold text-on-surface">مواعيد اليوم</h2>
         </div>
-        
-        <div class="space-y-4">
-            <!-- Ahmad Mohammad -->
-            <div class="flex items-center gap-4 p-3 bg-background rounded-lg border-r-4 border-secondary select-none">
-                <div class="text-center min-w-[50px]">
-                    <p class="font-bold text-headline-md leading-none text-secondary">09:00</p>
-                    <p class="text-label-md text-on-surface-variant">صباحاً</p>
-                </div>
-                <div class="flex-grow text-right">
-                    <p class="font-title-md">أحمد محمد عبد الله</p>
-                    <p class="text-body-md text-on-surface-variant">تنظيف أسنان وتلميع</p>
-                </div>
-                <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-            </div>
 
-            <!-- Sarah Ali -->
-            <div class="flex items-center gap-4 p-3 bg-background rounded-lg border-r-4 border-primary select-none">
-                <div class="text-center min-w-[50px]">
-                    <p class="font-bold text-headline-md leading-none text-primary">10:30</p>
-                    <p class="text-label-md text-on-surface-variant">صباحاً</p>
+        <div class="space-y-3">
+            @php
+                $appointments = [
+                    ['time' => '09:00', 'period' => 'ص', 'name' => 'أحمد محمد عبد الله', 'service' => 'تنظيف وتلميع', 'status' => 'done', 'color' => 'secondary'],
+                    ['time' => '10:30', 'period' => 'ص', 'name' => 'سارة علي الناصر', 'service' => 'علاج عصب (جلسة 2)', 'status' => 'active', 'color' => 'primary'],
+                    ['time' => '12:00', 'period' => 'ظ', 'name' => 'فهد ناصر السديري', 'service' => 'تقويم - متابعة', 'status' => 'upcoming', 'color' => 'primary'],
+                    ['time' => '01:00', 'period' => 'م', 'name' => 'ياسر حسين القحطاني', 'service' => 'حشوة طارئة', 'status' => 'late', 'color' => 'error'],
+                ];
+            @endphp
+            @foreach($appointments as $appt)
+            <div class="appt-slot flex items-center gap-3 p-3 bg-background rounded-xl border-r-[3px] border-{{ $appt['color'] }} select-none">
+                <div class="text-center min-w-[48px]">
+                    <p class="text-lg font-bold text-{{ $appt['color'] }} leading-none">{{ $appt['time'] }}</p>
+                    <p class="text-[10px] text-on-surface-variant mt-0.5">{{ $appt['period'] }}</p>
                 </div>
-                <div class="flex-grow text-right">
-                    <p class="font-title-md">سارة علي الناصر</p>
-                    <p class="text-body-md text-on-surface-variant">علاج عصب (جلسة 2)</p>
+                <div class="flex-1 text-right min-w-0">
+                    <p class="text-[13px] font-semibold truncate">{{ $appt['name'] }}</p>
+                    <p class="text-[11px] text-on-surface-variant truncate">{{ $appt['service'] }}</p>
                 </div>
-                <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">pending</span>
+                @if($appt['status'] === 'done')
+                    <span class="material-symbols-outlined text-secondary text-[20px] flex-shrink-0" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                @elseif($appt['status'] === 'active')
+                    <span class="material-symbols-outlined text-primary text-[20px] flex-shrink-0 animate-pulse" style="font-variation-settings: 'FILL' 1;">pending</span>
+                @elseif($appt['status'] === 'late')
+                    <span class="badge badge-error text-[10px] flex-shrink-0">متأخر</span>
+                @else
+                    <span class="material-symbols-outlined text-on-surface-variant text-[20px] flex-shrink-0">schedule</span>
+                @endif
             </div>
-
-            <!-- Yasser Hussein -->
-            <div class="flex items-center gap-4 p-3 bg-background rounded-lg border-r-4 border-error select-none">
-                <div class="text-center min-w-[50px]">
-                    <p class="font-bold text-headline-md leading-none text-error">01:00</p>
-                    <p class="text-label-md text-on-surface-variant">مساءً</p>
-                </div>
-                <div class="flex-grow text-right">
-                    <p class="font-title-md">ياسر حسين القحطاني</p>
-                    <p class="text-body-md text-on-surface-variant">حشوة تجميلية طارئة</p>
-                </div>
-                <span class="bg-error-container text-error px-2 py-0.5 rounded text-label-md font-bold">متأخر</span>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
 
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-start mt-8">
-    <!-- Recent Patients list table (8 columns) -->
-    <div class="lg:col-span-8 bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm overflow-hidden">
-        <div class="p-6 flex justify-between items-center border-b border-outline-variant select-none">
-            <h3 class="font-title-lg text-title-lg">المرضى الأخيرون في العيادة</h3>
-            <button class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-colors focus:outline-none">
-                <span class="material-symbols-outlined">filter_list</span>
-                <span>تصفية الحالات</span>
+{{-- ─── Recent Patients + Inventory ─── --}}
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    {{-- Recent Patients Table (8 cols) --}}
+    <div class="lg:col-span-8 premium-card overflow-hidden">
+        <div class="p-5 flex justify-between items-center border-b border-outline-variant select-none">
+            <h2 class="text-[15px] font-bold text-on-surface">المرضى الأخيرون في العيادة</h2>
+            <button class="flex items-center gap-1.5 text-on-surface-variant hover:text-primary transition-colors text-[13px] font-medium">
+                <span class="material-symbols-outlined text-[18px]">filter_list</span>
+                <span>تصفية</span>
             </button>
         </div>
-        
         <div class="overflow-x-auto">
-            <table class="w-full text-right border-collapse">
+            <table class="data-table">
                 <thead>
-                    <tr class="bg-surface-container-low text-on-surface-variant text-label-md border-b border-outline-variant select-none">
-                        <th class="p-4 font-medium">اسم المريض</th>
-                        <th class="p-4 font-medium">آخر زيارة للعيادة</th>
-                        <th class="p-4 font-medium">حالة المريض الحالية</th>
-                        <th class="p-4 font-medium text-left">الملف الطبي</th>
+                    <tr>
+                        <th>المريض</th>
+                        <th>آخر زيارة</th>
+                        <th>الحالة</th>
+                        <th class="text-left">إجراء</th>
                     </tr>
                 </thead>
-                <tbody class="text-body-md">
-                    <!-- Leila Khaled -->
-                    <tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
-                        <td class="p-4 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">لخ</div>
-                            <span>ليلى خالد العمر</span>
+                <tbody>
+                    @php
+                        $patients = [
+                            ['initials' => 'لخ', 'name' => 'ليلى خالد العمر', 'date' => '22 أكتوبر 2023', 'status' => 'منتهية', 'type' => 'neutral'],
+                            ['initials' => 'فع', 'name' => 'فهد عبدالرحمن السعد', 'date' => '23 أكتوبر 2023', 'status' => 'قيد الانتظار', 'type' => 'pending'],
+                            ['initials' => 'مي', 'name' => 'منى إبراهيم العلي', 'date' => 'منذ ساعة', 'status' => 'في الكرسي', 'type' => 'success'],
+                            ['initials' => 'خر', 'name' => 'خالد رشيد الحربي', 'date' => 'أمس', 'status' => 'مكتملة', 'type' => 'success'],
+                        ];
+                    @endphp
+                    @foreach($patients as $p)
+                    <tr class="patient-row border-b border-outline-variant last:border-0">
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-primary/8 flex items-center justify-center text-primary font-bold text-[13px] flex-shrink-0">{{ $p['initials'] }}</div>
+                                <span class="font-semibold text-[14px]">{{ $p['name'] }}</span>
+                            </div>
                         </td>
-                        <td class="p-4">22 أكتوبر 2023</td>
-                        <td class="p-4">
-                            <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-label-md border border-secondary/20">منتهى</span>
+                        <td class="text-on-surface-variant text-[13px]">{{ $p['date'] }}</td>
+                        <td>
+                            <span class="badge badge-{{ $p['type'] }}">{{ $p['status'] }}</span>
                         </td>
-                        <td class="p-4 text-left">
-                            <a href="{{ route('patients.show', 1) }}" class="text-primary hover:underline font-bold">عرض الملف الطبي</a>
-                        </td>
-                    </tr>
-                    
-                    <!-- Fahd Abdulrahman -->
-                    <tr class="border-b border-outline-variant hover:bg-surface-container transition-colors">
-                        <td class="p-4 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-bold text-xs">فع</div>
-                            <span>فهد عبدالرحمن السعد</span>
-                        </td>
-                        <td class="p-4">23 أكتوبر 2023</td>
-                        <td class="p-4">
-                            <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-label-md border border-primary/20">قيد الانتظار</span>
-                        </td>
-                        <td class="p-4 text-left">
-                            <a href="{{ route('patients.show', 1) }}" class="text-primary hover:underline font-bold">عرض الملف الطبي</a>
+                        <td class="text-left">
+                            <a href="{{ route('patients.show', 1) }}" class="text-primary hover:underline font-semibold text-[13px]">عرض الملف</a>
                         </td>
                     </tr>
-                    
-                    <!-- Mona Ibrahim -->
-                    <tr class="hover:bg-surface-container transition-colors">
-                        <td class="p-4 flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary font-bold text-xs">مي</div>
-                            <span>منى إبراهيم العلي</span>
-                        </td>
-                        <td class="p-4">منذ ساعة واحدة</td>
-                        <td class="p-4">
-                            <span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-label-md border border-secondary/20">في الكرسي</span>
-                        </td>
-                        <td class="p-4 text-left">
-                            <a href="{{ route('patients.show', 1) }}" class="text-primary hover:underline font-bold">عرض الملف الطبي</a>
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
     </div>
 
-    <!-- Inventory Alerts (4 columns) -->
-    <div class="lg:col-span-4 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-2 select-none border-b border-outline-variant pb-2">
-            <span class="material-symbols-outlined text-error">inventory_2</span>
-            <h3 class="font-title-lg text-title-lg">تنبيهات المخزون الطبي</h3>
+    {{-- Inventory Alerts (4 cols) --}}
+    <div class="lg:col-span-4 premium-card p-6 flex flex-col gap-5">
+        <div class="flex items-center gap-2 select-none">
+            <span class="icon-badge icon-badge-error material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+            <h2 class="text-[15px] font-bold text-on-surface flex-1 text-right">تنبيهات المخزون</h2>
         </div>
-        
-        <div class="space-y-4">
-            <!-- Local Anesthetic -->
-            <div class="p-4 rounded-lg bg-error-container/20 border border-error-container/30 text-right select-none">
-                <div class="flex justify-between items-center mb-2">
-                    <p class="font-title-md text-error">مخدر موضعي (2%)</p>
-                    <span class="text-label-md font-bold text-error">5 متبقي</span>
-                </div>
-                <div class="w-full bg-error/10 h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-error h-full" style="width: 15%"></div>
-                </div>
-                <p class="text-label-md mt-2 text-on-surface-variant">أقل من الحد الأدنى الحرج للمستودع (15)</p>
-            </div>
 
-            <!-- Gloves -->
-            <div class="p-4 rounded-lg bg-surface-container border border-outline-variant text-right select-none">
-                <div class="flex justify-between items-center mb-2">
-                    <p class="font-title-md">قفازات طبية معقمة (L)</p>
-                    <span class="text-label-md font-bold">12 علبة متبقية</span>
-                </div>
-                <div class="w-full bg-outline-variant h-1.5 rounded-full overflow-hidden">
-                    <div class="bg-primary h-full" style="width: 40%"></div>
-                </div>
-                <p class="text-label-md mt-2 text-on-surface-variant">اقترب من الحد الأدنى لإعادة الطلب</p>
+        {{-- Critical --}}
+        <div class="p-4 rounded-xl bg-error-container/15 border border-error/15 text-right select-none">
+            <div class="flex justify-between items-center mb-2">
+                <span class="badge badge-error text-[10px]">حرج</span>
+                <p class="font-semibold text-[13px] text-on-surface">مخدر موضعي (2%)</p>
             </div>
-            
-            <button class="w-full py-3 border border-dashed border-outline rounded-lg text-on-surface-variant font-title-md flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
-                <span class="material-symbols-outlined">shopping_cart</span>
-                <span>فتح طلبات التوريد والشراء</span>
-            </button>
+            <div class="inventory-progress mb-2">
+                <div class="inventory-progress-fill danger" style="width: 15%"></div>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-[11px] text-on-surface-variant">الحد الأدنى: 15</span>
+                <span class="text-[12px] font-bold text-error">5 متبقي</span>
+            </div>
         </div>
+
+        {{-- Warning --}}
+        <div class="p-4 rounded-xl bg-surface-container border border-outline-variant text-right select-none">
+            <div class="flex justify-between items-center mb-2">
+                <span class="badge badge-warning text-[10px]">تحذير</span>
+                <p class="font-semibold text-[13px] text-on-surface">قفازات معقمة (L)</p>
+            </div>
+            <div class="inventory-progress mb-2">
+                <div class="inventory-progress-fill" style="width: 40%"></div>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-[11px] text-on-surface-variant">اقترب من الحد الأدنى</span>
+                <span class="text-[12px] font-bold text-on-surface">12 علبة</span>
+            </div>
+        </div>
+
+        <button class="w-full py-3 border-2 border-dashed border-outline-variant rounded-xl text-on-surface-variant text-[13px] font-semibold flex items-center justify-center gap-2 hover:border-primary hover:text-primary hover:bg-primary/3 transition-all">
+            <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+            <span>فتح طلبات التوريد</span>
+        </button>
     </div>
 </div>
+
 @endsection
 
 @push('scripts')

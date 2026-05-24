@@ -1,34 +1,97 @@
-/* Invoice Drawer Slide In - Left-anchored in RTL */
+/* ─────────────────────────────────────────────
+   BILLING — Premium Styles
+───────────────────────────────────────────── */
+
+/* Stat card animated icon */
+.billing-stat-card {
+    border-radius: 16px;
+    border: 1px solid var(--color-outline-variant);
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(15,23,42,0.04), 0 4px 16px rgba(15,23,42,0.03);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.billing-stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: -20px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    opacity: 0.06;
+    background: currentColor;
+    transition: transform 0.4s ease;
+}
+.billing-stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(15,23,42,0.1), 0 2px 8px rgba(15,23,42,0.05);
+}
+.billing-stat-card:hover::after { transform: scale(2.5); }
+
+/* Invoice preview drawer */
 #invoicePreview {
     position: fixed;
     left: 0;
-    top: 64px;
+    top: 0;
     bottom: 0;
     width: 420px;
-    max-width: 90vw;
-    z-index: 45;
-    background: #ffffff;
-    box-shadow: 10px 0 30px -5px rgba(0, 0, 0, 0.08);
-    transform: translateX(-105%);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    max-width: 95vw;
+    background: var(--color-surface-container-lowest);
+    border-right: 1px solid var(--color-outline-variant);
+    box-shadow: 6px 0 32px rgba(15,23,42,0.16);
+    z-index: 100;
+    transform: translateX(-110%);
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 0 20px 20px 0;
+    display: flex !important;
+    flex-direction: column;
+}
+#invoicePreview.open { transform: translateX(0); }
+
+/* Invoice drawer header gradient */
+.invoice-drawer-header {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    padding: 22px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
 }
 
-#invoicePreview.drawer-open {
-    transform: translateX(0) !important;
-}
-
+/* Backdrop overlay */
 #invoice-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(15, 23, 42, 0.35);
     backdrop-filter: blur(4px);
-    z-index: 44;
+    z-index: 99;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
+#invoice-overlay.open { opacity: 1; pointer-events: all; }
 
-#invoice-overlay.overlay-open {
-    opacity: 1;
-    pointer-events: auto;
+/* Invoice row hover state */
+.invoice-row {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
 }
+.invoice-row:hover { background: rgba(26,86,219,0.025); }
+.invoice-row.selected { background: rgba(26,86,219,0.05); }
+
+/* Invoice line separator */
+.invoice-divider {
+    height: 1px;
+    background: repeating-linear-gradient(
+        90deg,
+        var(--color-outline-variant) 0,
+        var(--color-outline-variant) 6px,
+        transparent 6px,
+        transparent 12px
+    );
+    margin: 12px 0;
+}
+
+/* Dark mode */
+body.dark-mode .billing-stat-card { background: var(--color-surface-container-lowest); }
+body.dark-mode #invoicePreview { background: var(--color-surface-container-lowest); border-color: var(--color-outline-variant); }

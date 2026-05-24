@@ -7,240 +7,250 @@
 @endpush
 
 @section('content')
-<!-- Header & View Switcher -->
+
+{{-- ── Page Header ── --}}
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 select-none">
     <div class="text-right">
-        <h2 class="font-headline-md text-headline-md text-on-surface">إدارة المواعيد وقائمة الانتظار</h2>
-        <p class="text-body-md text-on-surface-variant">جدولة الحالات، وتحديث قائمة الانتظار الحية للأطباء</p>
+        <h1 class="text-2xl font-bold text-on-surface tracking-tight">إدارة المواعيد</h1>
+        <p class="text-sm text-on-surface-variant mt-1">جدولة الحالات وتحديث قائمة الانتظار الحية</p>
     </div>
-    
-    <!-- Kanban / Calendar Toggles -->
-    <div class="flex items-center gap-2 bg-surface-container p-1 rounded-lg border border-outline-variant">
-        <button id="calendarToggle" class="px-4 py-2 rounded-md font-title-md text-title-md transition-all flex items-center gap-2 text-on-surface-variant hover:bg-surface-container-lowest focus:outline-none">
+
+    {{-- View Toggle --}}
+    <div class="flex items-center gap-2 bg-surface-container border border-outline-variant p-1 rounded-xl">
+        <button id="calendarToggle" class="view-toggle-btn text-on-surface-variant hover:bg-surface-container-lowest">
             <span class="material-symbols-outlined text-[18px]">calendar_view_day</span>
-            <span>عرض التقويم</span>
+            <span>التقويم</span>
         </button>
-        <button id="kanbanToggle" class="px-4 py-2 rounded-md font-title-md text-title-md transition-all flex items-center gap-2 bg-primary text-on-primary shadow-sm focus:outline-none">
+        <button id="kanbanToggle" class="view-toggle-btn active">
             <span class="material-symbols-outlined text-[18px]">view_column</span>
-            <span>لوحة كانبان</span>
+            <span>كانبان</span>
         </button>
     </div>
 </div>
 
-<!-- Filters Bar -->
-<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant flex flex-wrap items-end gap-4 shadow-sm mb-8 select-none">
-    <div class="flex flex-col gap-1 min-w-[200px] text-right">
-        <label class="text-label-md text-on-surface-variant mr-1">الفرع الحالي</label>
+{{-- ── Filters Bar ── --}}
+<div class="filters-bar p-4 flex flex-wrap items-end gap-4 mb-7 select-none">
+    <div class="flex flex-col gap-1.5 min-w-[190px] text-right">
+        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">الفرع</label>
         <div class="relative">
-            <select class="w-full bg-background border border-outline-variant rounded-lg py-2.5 pr-4 pl-10 appearance-none text-body-md focus:ring-primary focus:border-primary outline-none">
-                <option>جميع الفروع والمراكز</option>
+            <select class="form-input appearance-none pr-4 pl-9 py-2.5 text-[13px]">
+                <option>جميع الفروع</option>
                 <option>فرع الرياض - العليا</option>
                 <option>فرع جدة - الروضة</option>
             </select>
-            <span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
         </div>
     </div>
-    
-    <div class="flex flex-col gap-1 min-w-[200px] text-right">
-        <label class="text-label-md text-on-surface-variant mr-1">الطبيب المعالج</label>
+
+    <div class="flex flex-col gap-1.5 min-w-[190px] text-right">
+        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">الطبيب</label>
         <div class="relative">
-            <select class="w-full bg-background border border-outline-variant rounded-lg py-2.5 pr-4 pl-10 appearance-none text-body-md focus:ring-primary focus:border-primary outline-none">
-                <option>جميع الأطباء والأخصائيين</option>
-                <option>د. أحمد سمير (أخصائي تقويم)</option>
-                <option>د. سارة خالد (علاج جذور)</option>
-                <option>د. خالد العمر (جراحة وزراعة)</option>
+            <select class="form-input appearance-none pr-4 pl-9 py-2.5 text-[13px]">
+                <option>جميع الأطباء</option>
+                <option>د. أحمد سمير (تقويم)</option>
+                <option>د. سارة خالد (جذور)</option>
+                <option>د. خالد العمر (جراحة)</option>
             </select>
-            <span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
         </div>
     </div>
-    
-    <div class="flex flex-col gap-1 min-w-[150px] text-right">
-        <label class="text-label-md text-on-surface-variant mr-1">تاريخ المواعيد</label>
-        <button class="flex items-center justify-between gap-4 bg-background border border-outline-variant rounded-lg py-2.5 px-4 text-body-md hover:bg-surface-container transition-colors focus:outline-none">
+
+    <div class="flex flex-col gap-1.5 min-w-[150px] text-right">
+        <label class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">التاريخ</label>
+        <button class="form-input flex items-center justify-between gap-3 py-2.5 text-[13px] hover:border-primary transition-colors">
             <span>اليوم، {{ date('d F') }}</span>
-            <span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+            <span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_today</span>
         </button>
     </div>
-    
+
     <div class="flex-1"></div>
-    
-    <button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-title-md text-title-md flex items-center gap-2 shadow-md hover:bg-primary-container transition-all active:scale-95">
-        <span class="material-symbols-outlined">add</span>
-        <span>حجز موعد جديد</span>
+
+    <button class="btn-primary">
+        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">add</span>
+        <span>حجز موعد</span>
     </button>
 </div>
 
-<!-- 1. Kanban Board view -->
-<div id="kanbanBoard" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter items-start select-none">
-    <!-- Column: Waiting (في الانتظار) -->
-    <div class="kanban-col-drop flex flex-col gap-4 bg-surface-container-low p-4 rounded-xl border border-outline-variant" id="col-waiting">
-        <div class="flex items-center justify-between px-2">
-            <div class="flex items-center gap-2">
-                <div class="w-2 h-6 bg-tertiary rounded-full"></div>
-                <h3 class="font-title-lg text-title-lg">في الانتظار</h3>
-                <span class="col-badge bg-surface-container-lowest text-on-surface-variant text-label-md px-2 py-0.5 rounded-full font-bold">2</span>
-            </div>
-            <button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button>
-        </div>
-        
-        <div class="kanban-col-cards flex flex-col gap-3 min-h-[300px]">
-            <!-- Card 1 -->
-            <div id="card-otaibi" draggable="true" class="kanban-card bg-surface-container-lowest border border-outline-variant p-4 rounded-xl hover:border-primary shadow-sm text-right">
-                <div class="flex justify-between items-start mb-3">
-                    <span class="text-label-md font-bold text-primary">تنظيف أسنان وتلميع</span>
-                    <span class="text-label-md text-on-surface-variant">10:30 ص</span>
-                </div>
-                <h4 class="font-title-md text-title-md mb-1 font-bold">محمد العتيبي</h4>
-                <div class="flex items-center gap-2 text-label-md text-on-surface-variant justify-end">
-                    <span>د. سارة خالد</span>
-                    <span class="material-symbols-outlined text-sm">person_outline</span>
-                </div>
-                <div class="mt-4 pt-3 border-t border-outline-variant flex justify-between items-center">
-                    <span class="bg-surface-container-high text-on-surface-variant text-[10px] px-2 py-0.5 rounded font-bold">مريض جديد</span>
-                    <div class="w-6 h-6 rounded-full bg-primary text-[10px] text-on-primary flex items-center justify-center font-bold">MA</div>
-                </div>
-            </div>
-            
-            <!-- Card 2 -->
-            <div id="card-abdullah" draggable="true" class="kanban-card bg-surface-container-lowest border border-outline-variant p-4 rounded-xl hover:border-primary shadow-sm text-right">
-                <div class="flex justify-between items-start mb-3">
-                    <span class="text-label-md font-bold text-primary">كشف دوري</span>
-                    <span class="text-label-md text-on-surface-variant">11:15 ص</span>
-                </div>
-                <h4 class="font-title-md text-title-md mb-1 font-bold">ليلى عبدالله</h4>
-                <div class="flex items-center gap-2 text-label-md text-on-surface-variant justify-end">
-                    <span>د. أحمد سمير</span>
-                    <span class="material-symbols-outlined text-sm">person_outline</span>
-                </div>
-                <div class="mt-4 pt-3 border-t border-outline-variant flex justify-between items-center">
-                    <span class="bg-error-container text-error text-[10px] px-2 py-0.5 rounded font-bold">حالة طارئة</span>
-                </div>
-            </div>
-        </div>
-    </div>
+{{-- ── Kanban Board ── --}}
+<div id="kanbanBoard" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 items-start select-none">
 
-    <!-- Column: In Progress (قيد العلاج) -->
-    <div class="kanban-col-drop flex flex-col gap-4 bg-surface-container-low p-4 rounded-xl border border-outline-variant" id="col-progress">
-        <div class="flex items-center justify-between px-2">
+    {{-- Column: Waiting --}}
+    <div class="kanban-col-drop flex flex-col gap-3 p-4" id="col-waiting">
+        <div class="flex items-center justify-between px-1 mb-1">
             <div class="flex items-center gap-2">
-                <div class="w-2 h-6 bg-primary rounded-full"></div>
-                <h3 class="font-title-lg text-title-lg">قيد العلاج</h3>
-                <span class="col-badge bg-primary-fixed text-primary text-label-md px-2 py-0.5 rounded-full font-bold">1</span>
+                <div class="kanban-status-dot bg-amber-400"></div>
+                <h3 class="text-[14px] font-bold text-on-surface">في الانتظار</h3>
+                <span class="col-badge text-[11px] font-bold bg-amber-100 text-amber-700 px-2.5 py-0.5 rounded-full">2</span>
             </div>
-            <button class="material-symbols-outlined text-on-surface-variant">more_horiz</button>
+            <button class="header-icon-btn text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px]">more_horiz</span>
+            </button>
         </div>
-        
-        <div class="kanban-col-cards flex flex-col gap-3 min-h-[300px]">
-            <!-- Active treatment card -->
-            <div id="card-nasser" draggable="true" class="kanban-card bg-surface-container-lowest border-2 border-primary p-4 rounded-xl shadow-md relative overflow-hidden text-right">
-                <div class="absolute top-0 right-0 left-0 h-1 bg-primary animate-pulse"></div>
-                <div class="flex justify-between items-start mb-3">
-                    <span class="text-label-md font-bold text-primary">تقويم أسنان</span>
-                    <div class="flex items-center gap-1 text-primary animate-pulse">
-                        <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">timer</span>
-                        <span class="text-label-md font-bold">15:00</span>
+
+        <div class="kanban-col-cards flex flex-col gap-3 min-h-[320px]">
+            <div id="card-otaibi" draggable="true" class="kanban-card p-4 text-right">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-[11px] font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">في الانتظار</span>
+                    <span class="text-[12px] text-on-surface-variant">10:30 ص</span>
+                </div>
+                <h4 class="text-[14px] font-bold text-on-surface mb-1">محمد العتيبي</h4>
+                <p class="text-[12px] text-primary font-semibold mb-3">تنظيف أسنان وتلميع</p>
+                <div class="flex justify-between items-center border-t border-outline-variant pt-3">
+                    <div class="w-7 h-7 rounded-lg bg-primary text-[10px] text-on-primary flex items-center justify-center font-bold">MA</div>
+                    <div class="flex items-center gap-1.5 text-[11px] text-on-surface-variant">
+                        <span>د. سارة خالد</span>
+                        <span class="material-symbols-outlined text-[14px]">person_outline</span>
                     </div>
                 </div>
-                <h4 class="font-title-md text-title-md mb-1 font-bold">فهد ناصر السديري</h4>
-                <div class="flex items-center gap-2 text-label-md text-on-surface-variant justify-end">
+                <span class="inline-block mt-2 text-[10px] font-bold bg-surface-container text-on-surface-variant px-2 py-0.5 rounded">مريض جديد</span>
+            </div>
+
+            <div id="card-abdullah" draggable="true" class="kanban-card p-4 text-right">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="badge badge-error text-[10px]">حالة طارئة</span>
+                    <span class="text-[12px] text-on-surface-variant">11:15 ص</span>
+                </div>
+                <h4 class="text-[14px] font-bold text-on-surface mb-1">ليلى عبدالله</h4>
+                <p class="text-[12px] text-primary font-semibold mb-3">كشف دوري</p>
+                <div class="flex justify-between items-center border-t border-outline-variant pt-3">
+                    <div></div>
+                    <div class="flex items-center gap-1.5 text-[11px] text-on-surface-variant">
+                        <span>د. أحمد سمير</span>
+                        <span class="material-symbols-outlined text-[14px]">person_outline</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Column: In Progress --}}
+    <div class="kanban-col-drop flex flex-col gap-3 p-4" id="col-progress">
+        <div class="flex items-center justify-between px-1 mb-1">
+            <div class="flex items-center gap-2">
+                <div class="kanban-status-dot bg-primary animate-pulse-ring"></div>
+                <h3 class="text-[14px] font-bold text-on-surface">قيد العلاج</h3>
+                <span class="col-badge text-[11px] font-bold bg-primary/10 text-primary px-2.5 py-0.5 rounded-full">1</span>
+            </div>
+            <button class="header-icon-btn text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px]">more_horiz</span>
+            </button>
+        </div>
+
+        <div class="kanban-col-cards flex flex-col gap-3 min-h-[320px]">
+            <div id="card-nasser" draggable="true" class="kanban-card kanban-card-active p-4 relative overflow-hidden text-right">
+                <div class="absolute top-0 right-0 left-0 h-1.5 bg-gradient-to-r from-primary to-primary-light"></div>
+                <div class="flex justify-between items-center mb-3 mt-1">
+                    <div class="flex items-center gap-1.5 text-primary">
+                        <span class="material-symbols-outlined text-[14px] animate-pulse" style="font-variation-settings: 'FILL' 1;">timer</span>
+                        <span class="text-[13px] font-bold">15:00</span>
+                    </div>
+                    <span class="text-[11px] font-bold text-primary bg-primary/8 px-2.5 py-1 rounded-full border border-primary/15">جاري العلاج</span>
+                </div>
+                <h4 class="text-[14px] font-bold text-on-surface mb-1">فهد ناصر السديري</h4>
+                <p class="text-[12px] text-primary font-semibold mb-3">تقويم أسنان</p>
+                <div class="flex items-center gap-1.5 text-[11px] text-on-surface-variant justify-end mb-4">
                     <span>د. أحمد سمير</span>
-                    <span class="material-symbols-outlined text-sm">person_outline</span>
+                    <span class="material-symbols-outlined text-[14px]">person_outline</span>
                 </div>
-                <div class="mt-4 flex gap-2">
-                    <button class="flex-1 bg-surface-container text-on-surface text-label-md py-1.5 rounded hover:bg-surface-container-high transition-colors font-bold">تفاصيل</button>
-                    <button class="flex-1 bg-primary text-on-primary text-label-md py-1.5 rounded hover:bg-primary-container transition-colors font-bold">إنهاء الجلسة</button>
+                <div class="flex gap-2">
+                    <button class="flex-1 py-2 bg-surface-container text-on-surface-variant text-[12px] font-semibold rounded-lg hover:bg-surface-container-high transition-colors">تفاصيل</button>
+                    <button class="flex-1 py-2 bg-primary text-on-primary text-[12px] font-semibold rounded-lg hover:bg-primary-container transition-colors">إنهاء الجلسة</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Column: Completed (مكتمل) -->
-    <div class="kanban-col-drop flex flex-col gap-4 bg-surface-container-low p-4 rounded-xl border border-outline-variant" id="col-completed">
-        <div class="flex items-center justify-between px-2">
+    {{-- Column: Completed --}}
+    <div class="kanban-col-drop flex flex-col gap-3 p-4" id="col-completed">
+        <div class="flex items-center justify-between px-1 mb-1">
             <div class="flex items-center gap-2">
-                <div class="w-2 h-6 bg-secondary rounded-full"></div>
-                <h3 class="font-title-lg text-title-lg">مكتمل</h3>
-                <span class="col-badge bg-secondary-container text-on-secondary-container text-label-md px-2 py-0.5 rounded-full font-bold">1</span>
+                <div class="kanban-status-dot bg-secondary"></div>
+                <h3 class="text-[14px] font-bold text-on-surface">مكتمل</h3>
+                <span class="col-badge text-[11px] font-bold bg-secondary/10 text-secondary px-2.5 py-0.5 rounded-full">1</span>
             </div>
-            <button class="material-symbols-outlined text-on-surface-variant">more_horiz</button>
+            <button class="header-icon-btn text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px]">more_horiz</span>
+            </button>
         </div>
-        
-        <div class="kanban-col-cards flex flex-col gap-3 min-h-[300px]">
-            <div id="card-shehri" class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl opacity-75 grayscale-[0.3] text-right">
-                <div class="flex justify-between items-start mb-3">
-                    <span class="text-label-md font-bold text-on-surface-variant">حشوة تجميلية</span>
-                    <span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+
+        <div class="kanban-col-cards flex flex-col gap-3 min-h-[320px]">
+            <div id="card-shehri" class="kanban-card p-4 opacity-75 text-right">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="material-symbols-outlined text-secondary text-[20px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    <span class="text-[12px] text-on-surface-variant">09:45 ص</span>
                 </div>
-                <h4 class="font-title-md text-title-md mb-1 font-bold">نورة الشهري</h4>
-                <p class="text-label-md text-on-surface-variant">انتهى العلاج في 09:45 ص</p>
+                <h4 class="text-[14px] font-semibold text-on-surface mb-1">نورة الشهري</h4>
+                <p class="text-[12px] text-on-surface-variant font-semibold mb-2">حشوة تجميلية</p>
+                <p class="text-[11px] text-on-surface-variant">انتهى العلاج في 09:45 ص</p>
             </div>
         </div>
     </div>
 
-    <!-- Column: Cancelled (ملغي) -->
-    <div class="kanban-col-drop flex flex-col gap-4 bg-surface-container-low p-4 rounded-xl border border-outline-variant" id="col-cancelled">
-        <div class="flex items-center justify-between px-2">
+    {{-- Column: Cancelled --}}
+    <div class="kanban-col-drop flex flex-col gap-3 p-4" id="col-cancelled">
+        <div class="flex items-center justify-between px-1 mb-1">
             <div class="flex items-center gap-2">
-                <div class="w-2 h-6 bg-error rounded-full"></div>
-                <h3 class="font-title-lg text-title-lg">ملغي</h3>
-                <span class="col-badge bg-error-container text-on-error-container text-label-md px-2 py-0.5 rounded-full font-bold">1</span>
+                <div class="kanban-status-dot bg-error"></div>
+                <h3 class="text-[14px] font-bold text-on-surface">ملغي</h3>
+                <span class="col-badge text-[11px] font-bold bg-error-container text-error px-2.5 py-0.5 rounded-full">1</span>
             </div>
-            <button class="material-symbols-outlined text-on-surface-variant">more_horiz</button>
+            <button class="header-icon-btn text-on-surface-variant">
+                <span class="material-symbols-outlined text-[18px]">more_horiz</span>
+            </button>
         </div>
-        
-        <div class="kanban-col-cards flex flex-col gap-3 min-h-[300px]">
-            <div id="card-qahtani" class="bg-surface-container-lowest border border-outline-variant p-4 rounded-xl opacity-75 border-dashed text-right">
-                <div class="flex justify-between items-start mb-3">
-                    <span class="text-label-md font-bold text-error">زراعة أسنان (جلسة 1)</span>
-                    <span class="material-symbols-outlined text-error text-sm">cancel</span>
+
+        <div class="kanban-col-cards flex flex-col gap-3 min-h-[320px]">
+            <div id="card-qahtani" class="kanban-card p-4 opacity-70 border-dashed text-right">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="material-symbols-outlined text-error text-[20px]">cancel</span>
+                    <span class="text-[12px] text-on-surface-variant">ملغي</span>
                 </div>
-                <h4 class="font-title-md text-title-md mb-1 font-bold">ياسر القحطاني</h4>
-                <p class="text-label-md text-on-surface-variant italic">ألغي بطلب هاتفي من المريض</p>
+                <h4 class="text-[14px] font-semibold text-on-surface mb-1">ياسر القحطاني</h4>
+                <p class="text-[12px] text-error font-semibold mb-2">زراعة أسنان (جلسة 1)</p>
+                <p class="text-[11px] text-on-surface-variant italic">ألغي بطلب هاتفي من المريض</p>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 2. Empty State/Calendar view (Hidden by default) -->
-<div id="calendarView" class="hidden bg-surface-container-lowest border border-outline-variant rounded-xl p-gutter min-h-[500px] flex flex-col shadow-sm select-none">
+{{-- ── Calendar View (Hidden) ── --}}
+<div id="calendarView" class="hidden premium-card p-6 min-h-[600px] flex flex-col select-none">
     <div class="flex items-center justify-between mb-6">
-        <div class="flex items-center gap-4">
-            <button class="p-2 hover:bg-surface-container rounded-full focus:outline-none"><span class="material-symbols-outlined">chevron_right</span></button>
-            <h3 class="font-headline-md text-headline-md font-bold">مايو 2026</h3>
-            <button class="p-2 hover:bg-surface-container rounded-full focus:outline-none"><span class="material-symbols-outlined">chevron_left</span></button>
+        <div class="flex items-center gap-2">
+            <button class="header-icon-btn text-on-surface-variant">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+            <h3 class="text-lg font-bold text-on-surface">مايو 2026</h3>
+            <button class="header-icon-btn text-on-surface-variant">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>
         </div>
-        
         <div class="flex gap-2">
-            <button class="px-4 py-1.5 border border-outline-variant rounded-lg text-label-md hover:bg-surface-container transition-colors">يوم</button>
-            <button class="px-4 py-1.5 bg-primary text-on-primary rounded-lg text-label-md shadow">أسبوع</button>
-            <button class="px-4 py-1.5 border border-outline-variant rounded-lg text-label-md hover:bg-surface-container transition-colors">شهر</button>
+            @foreach(['يوم','أسبوع','شهر'] as $view)
+            <button class="px-4 py-1.5 {{ $view === 'أسبوع' ? 'bg-primary text-on-primary shadow-md shadow-primary/20' : 'border border-outline-variant text-on-surface-variant hover:bg-surface-container' }} rounded-lg text-[12px] font-semibold transition-all">{{ $view }}</button>
+            @endforeach
         </div>
     </div>
 
-    <div class="grid grid-cols-7 border-t border-r border-outline-variant flex-grow">
-        <!-- Calendar Grid Header -->
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">الأحد</div>
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">الاثنين</div>
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">الثلاثاء</div>
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">الأربعاء</div>
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">الخميس</div>
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">الجمعة</div>
-        <div class="p-4 text-center border-b border-l border-outline-variant font-bold text-on-surface-variant bg-surface-container-low">السبت</div>
-        
-        <!-- Render 31 Calendar Grid Items -->
+    <div class="grid grid-cols-7 border-t border-r border-outline-variant flex-grow rounded-xl overflow-hidden">
+        @foreach(['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'] as $day)
+        <div class="p-3 text-center text-[12px] font-bold text-on-surface-variant border-b border-l border-outline-variant bg-surface-container-low">{{ $day }}</div>
+        @endforeach
+
         @for($i = 1; $i <= 31; $i++)
-            <div class="p-2 min-h-[120px] border-b border-l border-outline-variant hover:bg-surface-container-low/20 transition-colors relative group text-right">
-                <span class="text-label-md font-bold {{ $i === 24 ? 'bg-primary text-on-primary w-6 h-6 flex items-center justify-center rounded-full' : 'text-on-surface-variant' }}">{{ $i }}</span>
-                @if($i === 24)
-                    <div class="mt-2 space-y-1.5">
-                        <div class="bg-primary-container text-on-primary-container p-1.5 rounded text-[10px] font-bold truncate">10:30 - محمد العتيبي</div>
-                        <div class="bg-secondary-container text-on-secondary-container p-1.5 rounded text-[10px] font-bold truncate">11:15 - ليلى عبدالله</div>
-                    </div>
-                @endif
+        <div class="p-2 min-h-[110px] border-b border-l border-outline-variant hover:bg-primary/3 transition-colors relative text-right {{ $i === 24 ? 'cal-today' : '' }}">
+            <span class="text-[12px] font-bold inline-flex items-center justify-center {{ $i === 24 ? 'w-6 h-6 bg-primary text-on-primary rounded-full' : 'text-on-surface-variant' }}">{{ $i }}</span>
+            @if($i === 24)
+            <div class="mt-1.5 space-y-1">
+                <div class="bg-primary/10 text-primary p-1.5 rounded-md text-[10px] font-bold truncate border border-primary/15">10:30 - محمد العتيبي</div>
+                <div class="bg-secondary/10 text-secondary p-1.5 rounded-md text-[10px] font-bold truncate border border-secondary/15">11:15 - ليلى عبدالله</div>
             </div>
+            @endif
+        </div>
         @endfor
     </div>
 </div>
+
 @endsection
 
 @push('scripts')

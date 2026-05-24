@@ -1,36 +1,117 @@
-/* Sidebar Transitions & Collapsed State Styles */
+/* ─────────────────────────────────────────────
+   SIDEBAR — Premium Redesign
+───────────────────────────────────────────── */
+
+/* Base */
 #app-sidebar {
-    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    width: var(--spacing-sidebar-width, 260px);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+    width: var(--spacing-sidebar-width, 272px);
+    background: linear-gradient(180deg, #ffffff 0%, #fafcff 100%);
+    border-left: 1px solid var(--color-outline-variant);
+    box-shadow: -2px 0 24px rgba(15, 23, 42, 0.05);
 }
 
-/* Collapsed class applied via JS */
+/* Collapsed state */
 #app-sidebar.sidebar-collapsed {
-    width: 70px !important;
+    width: 72px !important;
 }
-
 #app-sidebar.sidebar-collapsed .sidebar-text {
     display: none !important;
 }
-
 #app-sidebar.sidebar-collapsed .group-collapsed-hidden {
     opacity: 0 !important;
     pointer-events: none;
 }
-
 #app-sidebar.sidebar-collapsed .sidebar-item {
     justify-content: center !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
 
-/* Sidebar Active Item Highlight */
+/* Active item — left border accent + gradient bg */
 .sidebar-item-active {
-    border-right: 4px solid var(--color-primary, #004ac6);
-    background-color: rgba(0, 74, 198, 0.05);
+    background: linear-gradient(90deg, rgba(26,86,219,0.08) 0%, rgba(26,86,219,0.03) 100%) !important;
+    border-right: 3px solid var(--color-primary) !important;
+    color: var(--color-primary) !important;
 }
 
-/* Submenu layout transitions */
+/* Sidebar nav items */
+.sidebar-item {
+    position: relative;
+    border-radius: 10px;
+    margin-inline: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease;
+    overflow: hidden;
+}
+.sidebar-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(26,86,219,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    border-radius: inherit;
+}
+.sidebar-item:hover::before { opacity: 1; }
+.sidebar-item:hover { color: var(--color-primary); transform: translateX(-2px); }
+.sidebar-item:active { transform: scale(0.97); }
+
+/* Section group labels */
+.sidebar-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-outline);
+    padding: 0 20px;
+    margin-bottom: 6px;
+}
+
+/* Submenu */
 #sidebar-treatment-submenu {
-    transition: max-height 0.2s ease-out;
+    transition: max-height 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.2s ease;
+    overflow: hidden;
+}
+#sidebar-treatment-submenu a {
+    position: relative;
+    padding-right: 40px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-inline: 6px;
+    transition: all 0.15s ease;
+}
+#sidebar-treatment-submenu a::before {
+    content: '';
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--color-outline);
+    transition: background 0.15s ease;
+}
+#sidebar-treatment-submenu a:hover::before { background: var(--color-primary); }
+
+/* Sidebar divider */
+.sidebar-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-outline-variant), transparent);
+    margin: 12px 16px;
+}
+
+/* Dark mode */
+body.dark-mode #app-sidebar {
+    background: linear-gradient(180deg, #111827 0%, #0f172a 100%);
+    border-color: var(--color-outline-variant);
+    box-shadow: -2px 0 24px rgba(0,0,0,0.3);
+}
+body.dark-mode .sidebar-item-active {
+    background: linear-gradient(90deg, rgba(59,130,246,0.12) 0%, rgba(59,130,246,0.04) 100%) !important;
 }

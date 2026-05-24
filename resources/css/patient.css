@@ -1,35 +1,162 @@
-/* Medical Timeline & Dental Chart Styles */
+/* ─────────────────────────────────────────────
+   PATIENT PROFILE — Premium Styles
+───────────────────────────────────────────── */
+
+/* Patient header card */
+.patient-header-card {
+    background: linear-gradient(135deg, #ffffff 60%, rgba(26,86,219,0.03) 100%);
+    border: 1px solid var(--color-outline-variant);
+    border-radius: 20px;
+    box-shadow: 0 2px 12px rgba(15,23,42,0.06), 0 1px 4px rgba(15,23,42,0.04);
+}
+
+/* Avatar ring with glow */
+.patient-avatar-ring {
+    border: 4px solid rgba(26,86,219,0.15);
+    box-shadow: 0 0 0 2px rgba(26,86,219,0.1), 0 4px 14px rgba(15,23,42,0.12);
+    transition: all 0.3s ease;
+}
+.patient-avatar-ring:hover {
+    border-color: rgba(26,86,219,0.35);
+    box-shadow: 0 0 0 4px rgba(26,86,219,0.12), 0 6px 20px rgba(15,23,42,0.14);
+}
+
+/* Tab navigation */
+.patient-tab-btn {
+    position: relative;
+    padding: 12px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-on-surface-variant);
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+}
+.patient-tab-btn:hover { color: var(--color-on-surface); }
+.patient-tab-btn.active {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+.patient-tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 20%; right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    border-radius: 99px;
+}
+
+/* Dental chart grid */
 .tooth-grid {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
-    gap: 6px;
+    gap: 4px;
+    width: 100%;
 }
 
-@media (max-width: 768px) {
-    .tooth-grid {
-        grid-template-columns: repeat(8, 1fr);
-    }
-}
-
+/* Individual tooth button */
 .tooth-item {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    aspect-ratio: 1;
+    border-radius: 6px;
+    border: 1px solid var(--color-outline-variant);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    font-size: 9px;
+    background: var(--color-surface-container-low);
+    color: var(--color-on-surface-variant);
 }
-
 .tooth-item:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(26,86,219,0.2);
+    border-color: var(--color-primary);
+}
+.tooth-item.selected {
+    box-shadow: 0 0 0 2px var(--color-primary), 0 4px 12px rgba(26,86,219,0.25);
 }
 
-/* Timeline bullet points design */
+/* Medical timeline */
+.timeline-line {
+    position: absolute;
+    right: 43px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-outline-variant) 100%);
+    border-radius: 99px;
+}
+.timeline-bullet {
+    position: relative;
+    padding-right: 52px;
+}
 .timeline-bullet::before {
     content: '';
     position: absolute;
-    right: -25px;
-    top: 5px;
+    right: 35px;
+    top: 18px;
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background-color: var(--color-primary, #004ac6);
-    border: 3px solid #ffffff;
-    box-shadow: 0 0 0 2px var(--color-outline-variant, #c3c6d7);
-    z-index: 10;
+    background: var(--color-primary);
+    border: 3px solid var(--color-surface-container-lowest);
+    box-shadow: 0 0 0 2px rgba(26,86,219,0.2);
+    z-index: 5;
 }
+
+/* Medications list items */
+.medication-item {
+    border-radius: 10px;
+    background: var(--color-surface-container-low);
+    border: 1px solid var(--color-outline-variant);
+    transition: all 0.2s ease;
+}
+.medication-item:hover { border-color: var(--color-primary); background: rgba(26,86,219,0.03); }
+
+/* Next appointment card */
+.next-appt-card {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    border-radius: 18px;
+    box-shadow: 0 8px 28px rgba(26,86,219,0.35), 0 2px 8px rgba(26,86,219,0.2);
+    position: relative;
+    overflow: hidden;
+}
+.next-appt-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    pointer-events: none;
+}
+.next-appt-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    pointer-events: none;
+}
+
+/* Allergy badge */
+.allergy-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 12px;
+    background: var(--color-error-container);
+    color: var(--color-error);
+    border: 1px solid rgba(220,38,38,0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    animation: fadeInUp 0.3s ease both;
+}
+
+/* Dark mode */
+body.dark-mode .patient-header-card { background: var(--color-surface-container-lowest); }
+body.dark-mode .timeline-bullet::before { border-color: var(--color-surface-container); }
+body.dark-mode .tooth-item { background: var(--color-surface-container); }

@@ -7,283 +7,248 @@
 @endpush
 
 @section('content')
-<!-- Header Section -->
-<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 select-none text-right">
+
+{{-- ── Page Header ── --}}
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-5 mb-8 select-none text-right">
     <div>
-        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">إدارة الفواتير والمالية</h1>
-        <p class="font-body-md text-body-md text-on-surface-variant">تتبع الإيرادات والمطالبات المالية والمبالغ غير المحصلة</p>
+        <h1 class="text-2xl font-bold text-on-surface tracking-tight mb-1">إدارة الفواتير والمالية</h1>
+        <p class="text-sm text-on-surface-variant">تتبع الإيرادات والمطالبات والمبالغ غير المحصلة</p>
     </div>
-    
-    <button class="bg-primary text-on-primary px-6 py-3 rounded-xl font-bold text-title-md flex items-center gap-2 hover:bg-primary-container transition-all shadow-lg shadow-primary/20 active:scale-95">
-        <span class="material-symbols-outlined">add</span>
+    <button class="btn-primary shrink-0">
+        <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">add</span>
         <span>إنشاء فاتورة جديدة</span>
     </button>
 </div>
 
-<!-- Stats Dashboard Grid -->
-<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8 select-none text-right">
-    <!-- Stat 1 -->
-    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover:border-primary transition-all group shadow-sm">
+{{-- ── Stat Cards ── --}}
+<div class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-8 select-none stagger-children">
+
+    <div class="billing-stat-card p-6 text-right">
         <div class="flex justify-between items-start mb-4">
-            <div class="p-3 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                <span class="material-symbols-outlined">account_balance_wallet</span>
+            <div class="icon-badge icon-badge-primary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
             </div>
-            <span class="text-secondary text-xs font-bold">+12.5%</span>
+            <span class="badge badge-success text-[10px]">+12.5%</span>
         </div>
-        <p class="text-on-surface-variant text-label-md font-bold mb-1">إجمالي الفواتير الصادرة</p>
-        <h3 class="font-headline-md text-headline-md font-bold">45,280 ر.س</h3>
+        <p class="text-[12px] text-on-surface-variant font-bold mb-1">إجمالي الفواتير الصادرة</p>
+        <h3 class="text-2xl font-bold text-on-surface tracking-tight">45,280</h3>
+        <p class="text-[11px] text-on-surface-variant mt-1">ريال سعودي</p>
     </div>
-    
-    <!-- Stat 2 -->
-    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover:border-error transition-all group shadow-sm">
+
+    <div class="billing-stat-card p-6 text-right">
         <div class="flex justify-between items-start mb-4">
-            <div class="p-3 rounded-lg bg-error/10 text-error group-hover:bg-error group-hover:text-on-error transition-colors">
-                <span class="material-symbols-outlined">pending_actions</span>
+            <div class="icon-badge icon-badge-error">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pending_actions</span>
             </div>
-            <span class="text-error text-xs font-bold">-2.1%</span>
+            <span class="badge badge-error text-[10px]">-2.1%</span>
         </div>
-        <p class="text-on-surface-variant text-label-md font-bold mb-1">المبالغ المستحقة والمعلقة</p>
-        <h3 class="font-headline-md text-headline-md font-bold">8,420 ر.س</h3>
+        <p class="text-[12px] text-on-surface-variant font-bold mb-1">المبالغ المستحقة</p>
+        <h3 class="text-2xl font-bold text-on-surface tracking-tight">8,420</h3>
+        <p class="text-[11px] text-on-surface-variant mt-1">ريال سعودي</p>
     </div>
-    
-    <!-- Stat 3 -->
-    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover:border-secondary transition-all group shadow-sm">
+
+    <div class="billing-stat-card p-6 text-right">
         <div class="flex justify-between items-start mb-4">
-            <div class="p-3 rounded-lg bg-secondary/10 text-secondary group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span class="material-symbols-outlined">fact_check</span>
+            <div class="icon-badge icon-badge-secondary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fact_check</span>
             </div>
-            <span class="text-secondary text-xs font-bold">+5.4%</span>
+            <span class="badge badge-success text-[10px]">+5.4%</span>
         </div>
-        <p class="text-on-surface-variant text-label-md font-bold mb-1">الفواتير المحصلة بالكامل</p>
-        <h3 class="font-headline-md text-headline-md font-bold">36,860 ر.س</h3>
+        <p class="text-[12px] text-on-surface-variant font-bold mb-1">الفواتير المحصلة</p>
+        <h3 class="text-2xl font-bold text-on-surface tracking-tight">36,860</h3>
+        <p class="text-[11px] text-on-surface-variant mt-1">ريال سعودي</p>
     </div>
-    
-    <!-- Stat 4 -->
-    <div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant hover:border-tertiary transition-all group shadow-sm">
+
+    <div class="billing-stat-card p-6 text-right">
         <div class="flex justify-between items-start mb-4">
-            <div class="p-3 rounded-lg bg-tertiary/10 text-tertiary group-hover:bg-tertiary group-hover:text-on-tertiary transition-colors">
-                <span class="material-symbols-outlined">description</span>
+            <div class="icon-badge icon-badge-tertiary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
             </div>
         </div>
-        <p class="text-on-surface-variant text-label-md font-bold mb-1">متوسط قيمة الفاتورة</p>
-        <h3 class="font-headline-md text-headline-md font-bold">1,200 ر.س</h3>
+        <p class="text-[12px] text-on-surface-variant font-bold mb-1">متوسط قيمة الفاتورة</p>
+        <h3 class="text-2xl font-bold text-on-surface tracking-tight">1,200</h3>
+        <p class="text-[11px] text-on-surface-variant mt-1">ريال سعودي</p>
     </div>
 </div>
 
-<!-- Main Table Layout -->
-<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
-    <div class="p-6 border-b border-outline-variant flex justify-between items-center bg-surface-bright select-none">
-        <h2 class="font-title-lg text-title-lg font-bold">الفواتير الأخيرة الصادرة</h2>
+{{-- ── Invoices Table ── --}}
+<div class="premium-card overflow-hidden">
+    <div class="p-5 border-b border-outline-variant flex justify-between items-center select-none">
         <div class="flex gap-2">
-            <button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-all focus:outline-none">
-                <span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+            <button class="btn-secondary py-2 px-3">
+                <span class="material-symbols-outlined text-[18px]">filter_list</span>
+                <span class="text-[13px]">تصفية</span>
             </button>
-            <button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container transition-all focus:outline-none">
-                <span class="material-symbols-outlined text-on-surface-variant">download</span>
+            <button class="btn-secondary py-2 px-3">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span class="text-[13px]">تصدير</span>
             </button>
         </div>
+        <h2 class="text-[15px] font-bold text-on-surface">الفواتير الأخيرة الصادرة</h2>
     </div>
-    
+
     <div class="overflow-x-auto">
-        <table class="w-full text-right border-collapse">
+        <table class="data-table">
             <thead>
-                <tr class="bg-surface-container-low text-on-surface-variant border-b border-outline-variant select-none">
-                    <th class="p-4 font-bold text-label-md">رقم الفاتورة</th>
-                    <th class="p-4 font-bold text-label-md">اسم المريض</th>
-                    <th class="p-4 font-bold text-label-md">تاريخ الإصدار</th>
-                    <th class="p-4 font-bold text-label-md">المبلغ المطلوب</th>
-                    <th class="p-4 font-bold text-label-md">الحالة الحالية</th>
-                    <th class="p-4 font-bold text-label-md text-left">إجراءات</th>
+                <tr>
+                    <th>رقم الفاتورة</th>
+                    <th>اسم المريض</th>
+                    <th>تاريخ الإصدار</th>
+                    <th>المبلغ</th>
+                    <th>الحالة</th>
+                    <th class="text-left">إجراءات</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- INV 001 -->
-                <tr class="border-b border-outline-variant hover:bg-surface-container-low/50 cursor-pointer transition-colors" 
-                    onclick="togglePreview('#INV-2024-001', 'أحمد محمد علي', '14 أكتوبر 2023', '2,450 ر.س', 'مدفوع بالكامل')">
-                    <td class="p-4 font-body-md font-bold">#INV-2024-001</td>
-                    <td class="p-4">
+                @php
+                    $invoices = [
+                        ['num' => '#INV-2024-001', 'patient' => 'أحمد محمد علي', 'initials' => 'أم', 'date' => '14 أكتوبر 2023', 'amount' => '2,450 ر.س', 'status' => 'مدفوع', 'type' => 'success'],
+                        ['num' => '#INV-2024-002', 'patient' => 'سارة ناصر السالم', 'initials' => 'سن', 'date' => '12 أكتوبر 2023', 'amount' => '1,800 ر.س', 'status' => 'قيد الانتظار', 'type' => 'pending'],
+                        ['num' => '#INV-2024-003', 'patient' => 'خالد خلف الرشيد', 'initials' => 'خخ', 'date' => '08 أكتوبر 2023', 'amount' => '4,200 ر.س', 'status' => 'متأخر', 'type' => 'error'],
+                        ['num' => '#INV-2024-004', 'patient' => 'منى فهد الدوسري', 'initials' => 'مف', 'date' => '05 أكتوبر 2023', 'amount' => '850 ر.س', 'status' => 'مدفوع', 'type' => 'success'],
+                    ];
+                @endphp
+                @foreach($invoices as $inv)
+                <tr class="invoice-row border-b border-outline-variant last:border-0"
+                    onclick="togglePreview('{{ $inv['num'] }}', '{{ $inv['patient'] }}', '{{ $inv['date'] }}', '{{ $inv['amount'] }}', '{{ $inv['status'] }}')"
+                >
+                    <td class="font-bold text-primary">{{ $inv['num'] }}</td>
+                    <td>
                         <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-xs select-none">أم</div>
-                            <span class="font-bold">أحمد محمد علي</span>
+                            <div class="w-9 h-9 rounded-xl bg-primary/8 flex items-center justify-center text-primary font-bold text-[12px] flex-shrink-0">{{ $inv['initials'] }}</div>
+                            <span class="font-semibold text-[14px]">{{ $inv['patient'] }}</span>
                         </div>
                     </td>
-                    <td class="p-4 font-body-md text-on-surface-variant">14 أكتوبر 2023</td>
-                    <td class="p-4 font-bold">2,450 ر.س</td>
-                    <td class="p-4">
-                        <span class="px-3 py-1 rounded-full bg-secondary-container/30 text-on-secondary-container text-xs font-bold border border-secondary/20">مدفوع</span>
+                    <td class="text-on-surface-variant text-[13px]">{{ $inv['date'] }}</td>
+                    <td class="font-bold text-[14px]">{{ $inv['amount'] }}</td>
+                    <td>
+                        <span class="badge badge-{{ $inv['type'] }}">{{ $inv['status'] }}</span>
                     </td>
-                    <td class="p-4 text-left">
-                        <button class="text-outline hover:text-primary transition-colors focus:outline-none">
-                            <span class="material-symbols-outlined">more_vert</span>
+                    <td class="text-left">
+                        <button class="header-icon-btn text-on-surface-variant hover:text-primary">
+                            <span class="material-symbols-outlined text-[18px]">more_vert</span>
                         </button>
                     </td>
                 </tr>
-
-                <!-- INV 002 -->
-                <tr class="border-b border-outline-variant hover:bg-surface-container-low/50 cursor-pointer transition-colors"
-                    onclick="togglePreview('#INV-2024-002', 'سارة ناصر السالم', '12 أكتوبر 2023', '1,800 ر.س', 'معلق')">
-                    <td class="p-4 font-body-md font-bold">#INV-2024-002</td>
-                    <td class="p-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary font-bold text-xs select-none">سن</div>
-                            <span class="font-bold">سارة ناصر السالم</span>
-                        </div>
-                    </td>
-                    <td class="p-4 font-body-md text-on-surface-variant">12 أكتوبر 2023</td>
-                    <td class="p-4 font-bold">1,800 ر.س</td>
-                    <td class="p-4">
-                        <span class="px-3 py-1 rounded-full bg-primary-container/10 text-primary text-xs font-bold border border-primary/20">قيد الانتظار</span>
-                    </td>
-                    <td class="p-4 text-left">
-                        <button class="text-outline hover:text-primary transition-colors focus:outline-none">
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </button>
-                    </td>
-                </tr>
-
-                <!-- INV 003 -->
-                <tr class="border-b border-outline-variant hover:bg-surface-container-low/50 cursor-pointer transition-colors"
-                    onclick="togglePreview('#INV-2024-003', 'خالد خلف الرشيد', '08 أكتوبر 2023', '4,200 ر.س', 'متأخر السداد')">
-                    <td class="p-4 font-body-md font-bold">#INV-2024-003</td>
-                    <td class="p-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-error/10 flex items-center justify-center text-error font-bold text-xs select-none">خخ</div>
-                            <span class="font-bold">خالد خلف الرشيد</span>
-                        </div>
-                    </td>
-                    <td class="p-4 font-body-md text-on-surface-variant">08 أكتوبر 2023</td>
-                    <td class="p-4 font-bold">4,200 ر.س</td>
-                    <td class="p-4">
-                        <span class="px-3 py-1 rounded-full bg-error-container/30 text-on-error-container text-xs font-bold border border-error/20">متأخر</span>
-                    </td>
-                    <td class="p-4 text-left">
-                        <button class="text-outline hover:text-primary transition-colors focus:outline-none">
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </button>
-                    </td>
-                </tr>
-
-                <!-- INV 004 -->
-                <tr class="hover:bg-surface-container-low/50 cursor-pointer transition-colors"
-                    onclick="togglePreview('#INV-2024-004', 'منى فهد الدوسري', '05 أكتوبر 2023', '850 ر.س', 'مدفوع بالكامل')">
-                    <td class="p-4 font-body-md font-bold">#INV-2024-004</td>
-                    <td class="p-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center text-secondary font-bold text-xs select-none">مف</div>
-                            <span class="font-bold">منى فهد الدوسري</span>
-                        </div>
-                    </td>
-                    <td class="p-4 font-body-md text-on-surface-variant">05 أكتوبر 2023</td>
-                    <td class="p-4 font-bold">850 ر.س</td>
-                    <td class="p-4">
-                        <span class="px-3 py-1 rounded-full bg-secondary-container/30 text-on-secondary-container text-xs font-bold border border-secondary/20">مدفوع</span>
-                    </td>
-                    <td class="p-4 text-left">
-                        <button class="text-outline hover:text-primary transition-colors focus:outline-none">
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </button>
-                    </td>
-                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
-    
+
+    {{-- Pagination --}}
     <div class="p-4 border-t border-outline-variant flex items-center justify-between select-none">
-        <span class="text-label-md text-on-surface-variant">عرض 4 من أصل 28 فاتورة حالية</span>
-        <div class="flex gap-2">
-            <button class="px-3 py-1 border border-outline-variant rounded-lg text-xs hover:bg-surface-container transition-colors focus:outline-none">السابق</button>
-            <button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs shadow focus:outline-none">1</button>
-            <button class="px-3 py-1 border border-outline-variant rounded-lg text-xs hover:bg-surface-container transition-colors focus:outline-none">التالي</button>
+        <span class="text-[12px] text-on-surface-variant">عرض 4 من أصل 28 فاتورة</span>
+        <div class="flex gap-1.5">
+            <button class="px-3 py-1.5 border border-outline-variant rounded-lg text-[12px] hover:bg-surface-container transition-colors">السابق</button>
+            <button class="px-3 py-1.5 bg-primary text-on-primary rounded-lg text-[12px] shadow-md shadow-primary/20">1</button>
+            <button class="px-3 py-1.5 border border-outline-variant rounded-lg text-[12px] hover:bg-surface-container transition-colors">2</button>
+            <button class="px-3 py-1.5 border border-outline-variant rounded-lg text-[12px] hover:bg-surface-container transition-colors">التالي</button>
         </div>
     </div>
 </div>
 
-<!-- Dark Backdrop overlay for sliding drawer -->
+{{-- ── Overlay Backdrop ── --}}
 <div id="invoice-overlay"></div>
 
-<!-- Sliding Invoice Preview Drawer (Left anchored) -->
-<div id="invoicePreview" class="hidden flex flex-col justify-between select-none">
-    <!-- Header Drawer -->
-    <div class="p-6 bg-primary text-on-primary flex justify-between items-center text-right">
-        <button class="p-1 hover:bg-on-primary/20 rounded transition-colors focus:outline-none" onclick="togglePreview()">
-            <span class="material-symbols-outlined text-white">close</span>
+{{-- ── Invoice Preview Drawer ── --}}
+<div id="invoicePreview">
+    {{-- Drawer Header --}}
+    <div class="invoice-drawer-header">
+        <button class="w-8 h-8 flex items-center justify-center rounded-lg bg-white/15 hover:bg-white/25 transition-colors focus:outline-none" onclick="togglePreview()">
+            <span class="material-symbols-outlined text-white text-[20px]">close</span>
         </button>
-        <h3 class="font-title-lg text-title-lg font-bold text-white">معاينة تفاصيل الفاتورة</h3>
+        <div class="text-right">
+            <h3 class="text-[16px] font-bold text-white">تفاصيل الفاتورة</h3>
+            <p class="text-primary-fixed-dim text-[12px]">معاينة قبل الطباعة</p>
+        </div>
     </div>
-    
-    <!-- Body Drawer -->
-    <div class="p-8 flex-grow overflow-y-auto text-right">
-        <!-- Branding logo & clinic details -->
-        <div class="flex justify-between items-start mb-8 flex-row-reverse">
-            <div class="text-primary font-bold text-2xl">دينتيرا</div>
-            <div class="text-left text-xs text-on-surface-variant">
-                <p>طريق الملك عبدالله، العليا، الرياض</p>
+
+    {{-- Drawer Body --}}
+    <div class="flex-1 overflow-y-auto p-7 text-right">
+        {{-- Branding --}}
+        <div class="flex justify-between items-start mb-7 flex-row-reverse">
+            <div class="flex items-center gap-2.5">
+                <div class="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+                </div>
+                <div>
+                    <p class="font-bold text-[16px] text-primary">دينتيرا</p>
+                    <p class="text-[11px] text-on-surface-variant">Dentera Dental ERP</p>
+                </div>
+            </div>
+            <div class="text-left text-[11px] text-on-surface-variant leading-relaxed">
+                <p class="font-semibold text-on-surface">عيادة الرياض - العليا</p>
+                <p>طريق الملك عبدالله</p>
                 <p>finance@dentera.com</p>
                 <p>+966 11 000 0000</p>
             </div>
         </div>
-        
-        <!-- Metadata -->
-        <div class="mb-8 pb-6 border-b border-outline-variant border-dashed">
-            <div class="flex justify-between mb-2 flex-row-reverse">
-                <span class="text-on-surface-variant font-bold">رقم الفاتورة:</span>
+
+        {{-- Invoice Meta --}}
+        <div class="mb-7 pb-6 border-b border-dashed border-outline-variant space-y-2.5">
+            <div class="flex justify-between flex-row-reverse">
+                <span class="text-[12px] text-on-surface-variant">رقم الفاتورة</span>
                 <span class="font-bold text-primary" id="drawer-inv-num">#INV-2024-001</span>
             </div>
-            <div class="flex justify-between mb-2 flex-row-reverse">
-                <span class="text-on-surface-variant font-bold">تاريخ الإصدار:</span>
-                <span id="drawer-inv-date">14/10/2023</span>
+            <div class="flex justify-between flex-row-reverse">
+                <span class="text-[12px] text-on-surface-variant">تاريخ الإصدار</span>
+                <span class="text-[13px] font-semibold" id="drawer-inv-date">14/10/2023</span>
             </div>
             <div class="flex justify-between flex-row-reverse">
-                <span class="text-on-surface-variant font-bold">حالة الفاتورة:</span>
-                <span class="text-secondary font-bold" id="drawer-inv-status">تم السداد</span>
+                <span class="text-[12px] text-on-surface-variant">حالة الفاتورة</span>
+                <span class="font-bold text-secondary" id="drawer-inv-status">تم السداد</span>
             </div>
         </div>
-        
-        <!-- Patient Details -->
-        <div class="mb-8">
-            <h4 class="text-label-md font-bold text-outline uppercase mb-2">بيانات المريض المدين</h4>
-            <p class="font-bold text-title-md text-on-surface" id="drawer-patient-name">أحمد محمد علي</p>
-            <p class="text-xs text-on-surface-variant mt-1">رقم الملف: P-88231</p>
+
+        {{-- Patient --}}
+        <div class="mb-7">
+            <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-2">بيانات المريض</p>
+            <p class="font-bold text-[15px] text-on-surface" id="drawer-patient-name">أحمد محمد علي</p>
+            <p class="text-[12px] text-on-surface-variant mt-0.5">رقم الملف: P-88231</p>
         </div>
-        
-        <!-- Services table list -->
-        <div class="space-y-4 mb-8">
-            <h4 class="text-label-md font-bold text-outline uppercase mb-2">الخدمات الطبية المقدمة</h4>
-            <div class="flex justify-between text-sm flex-row-reverse">
-                <span class="font-bold" id="drawer-total-amount">2,450 ر.س</span>
-                <span>تاج زيركون مخصص + كشف دوري</span>
-            </div>
-            <div class="flex justify-between text-xs text-on-surface-variant flex-row-reverse">
-                <span>0.00 ر.س (مشمولة)</span>
-                <span>ضريبة القيمة المضافة (15%)</span>
+
+        {{-- Services --}}
+        <div class="mb-7">
+            <p class="text-[10px] font-bold text-outline uppercase tracking-widest mb-3">الخدمات المقدمة</p>
+            <div class="space-y-2.5">
+                <div class="flex justify-between text-[13px] flex-row-reverse border-b border-outline-variant pb-2.5">
+                    <span class="font-bold" id="drawer-total-amount">2,450 ر.س</span>
+                    <span>تاج زيركون مخصص + كشف دوري</span>
+                </div>
+                <div class="flex justify-between text-[12px] text-on-surface-variant flex-row-reverse">
+                    <span>مشمولة (0.00)</span>
+                    <span>ضريبة القيمة المضافة (15%)</span>
+                </div>
             </div>
         </div>
-        
-        <!-- Calculation subtotal box -->
-        <div class="bg-surface-container-low p-4 rounded-xl space-y-2">
-            <div class="flex justify-between text-sm flex-row-reverse">
+
+        {{-- Totals --}}
+        <div class="bg-surface-container-low p-5 rounded-2xl space-y-2.5">
+            <div class="flex justify-between text-[13px] flex-row-reverse">
                 <span id="drawer-subtotal-amount">2,450 ر.س</span>
-                <span>المجموع الفرعي</span>
+                <span class="text-on-surface-variant">المجموع الفرعي</span>
             </div>
-            <div class="flex justify-between text-title-lg font-bold text-primary border-t border-outline-variant pt-2 mt-2 flex-row-reverse">
+            <div class="invoice-divider"></div>
+            <div class="flex justify-between font-bold text-[17px] text-primary flex-row-reverse">
                 <span id="drawer-total-amount-large">2,450 ر.س</span>
                 <span>الإجمالي الكلي</span>
             </div>
         </div>
     </div>
-    
-    <!-- Drawer Footer Actions -->
-    <div class="p-6 border-t border-outline-variant bg-surface-container-low/50 flex gap-3">
-        <button class="flex-1 bg-outline-variant text-on-surface py-3 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-outline transition-all focus:outline-none">
-            <span class="material-symbols-outlined text-lg">print</span>
+
+    {{-- Drawer Footer --}}
+    <div class="p-5 border-t border-outline-variant flex gap-3 bg-surface-container-low/40">
+        <button class="flex-1 btn-secondary justify-center py-3">
+            <span class="material-symbols-outlined text-[18px]">print</span>
             <span>طباعة</span>
         </button>
-        <button class="flex-1 bg-primary text-on-primary py-3 rounded-lg flex items-center justify-center gap-2 font-bold hover:bg-primary-container transition-all focus:outline-none">
-            <span class="material-symbols-outlined text-lg">share</span>
-            <span>مشاركة الفاتورة</span>
+        <button class="flex-1 btn-primary justify-center py-3">
+            <span class="material-symbols-outlined text-[18px]">share</span>
+            <span>مشاركة</span>
         </button>
     </div>
 </div>
+
 @endsection
 
 @push('scripts')

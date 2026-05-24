@@ -1,20 +1,103 @@
-/* Login branding custom style */
+/* ─────────────────────────────────────────────
+   LOGIN — Premium Styles
+───────────────────────────────────────────── */
+
+/* Hero left side gradient overlay */
 .login-hero-overlay {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(20, 184, 166, 0.8) 100%);
+    background: linear-gradient(
+        135deg,
+        rgba(26, 86, 219, 0.97) 0%,
+        rgba(16, 55, 160, 0.92) 60%,
+        rgba(14, 35, 100, 0.88) 100%
+    );
 }
 
-.ripple-effect {
+/* Animated floating shapes */
+.login-hero-shape {
     position: absolute;
-    background: rgba(255, 255, 255, 0.35);
     border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 0.6s linear;
+    pointer-events: none;
+    animation: float 6s ease-in-out infinite;
+}
+.login-hero-shape:nth-child(2) { animation-delay: 2s; }
+.login-hero-shape:nth-child(3) { animation-delay: 4s; }
+
+/* Feature stat cards on hero */
+.login-stat-item {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 14px 18px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.login-stat-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+
+/* Login form panel */
+.login-form-panel {
+    background: var(--color-surface);
+    position: relative;
+}
+.login-form-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(26,86,219,0.04), transparent 70%);
     pointer-events: none;
 }
 
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
+/* Input field premium style */
+.login-input {
+    width: 100%;
+    background: var(--color-surface-container-low);
+    border: 1.5px solid var(--color-outline-variant);
+    border-radius: 12px;
+    padding: 13px 46px 13px 14px;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    color: var(--color-on-surface);
+    outline: none;
 }
+.login-input:focus {
+    border-color: var(--color-primary);
+    background: var(--color-surface-container-lowest);
+    box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
+}
+
+/* CTA button gradient + glow */
+.login-btn-primary {
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 4px 18px rgba(26,86,219,0.4), 0 1px 4px rgba(26,86,219,0.2);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.login-btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.login-btn-primary:hover { box-shadow: 0 6px 24px rgba(26,86,219,0.5), 0 2px 8px rgba(26,86,219,0.25); transform: translateY(-1px); }
+.login-btn-primary:hover::before { opacity: 1; }
+.login-btn-primary:active { transform: scale(0.98); }
+
+/* Dark mode */
+body.dark-mode .login-form-panel { background: var(--color-surface); }
+body.dark-mode .login-input { background: var(--color-surface-container); border-color: var(--color-outline-variant); }
+body.dark-mode .login-input:focus { background: var(--color-surface-container-lowest); }
